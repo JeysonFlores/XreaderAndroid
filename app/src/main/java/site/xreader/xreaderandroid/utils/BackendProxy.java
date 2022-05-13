@@ -1,52 +1,62 @@
 package site.xreader.xreaderandroid.utils;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import android.content.Context;
+import android.widget.Toast;
+
+import com.studioidan.httpagent.HttpAgent;
+import com.studioidan.httpagent.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
+import site.xreader.xreaderandroid.callbacks.ErrorCallback;
 import site.xreader.xreaderandroid.callbacks.SimpleCallback;
 
 public class BackendProxy {
 
     private final String API_URL = "http://xreader.site/API";
     private String token;
-    private RequestQueue queue;
 
-    public BackendProxy () {
-        this.queue = Volley.newRequestQueue(null);
-    }
+    public BackendProxy () { }
 
     public void setToken(String token) {
         this.token = token;
     }
 
-    public void login(String username, String password, SimpleCallback cb) throws SecurityException {
+    public String getToken() {
+        return token;
+    }
 
-        String URL = API_URL + "/login";
+    public void login(Context c, String username, String password, SimpleCallback cb, ErrorCallback ecb) throws Exception {
+        RequestParams params = new RequestParams();
 
-        JsonObjectRequest loginRequest = new JsonObjectRequest (Request.Method.GET, URL, null,
-                new Response.Listener<JSONObject>() {
+        params.setParam("name", username);
+        params.setParam("password", password);
+
+        String URL = UrlBuilder.build(API_URL + "/login", params);
+
+        HttpAgent.get(URL)
+                .goString(new StringCallback() {
                     @Override
-                    public void onResponse(JSONObject  response) {
+                    protected void onDone(boolean success, String response) {
                         try {
-                            String token = response.getString("token");
-                            setToken(token);
-                            cb.call();
-                        } catch (JSONException e) {
-                            throw new SecurityException();
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (success) {
+                                if (!jsonObject.isNull("token")) {
+                                    setToken(jsonObject.getString("token"));
+                                    cb.call();
+                                } else {
+                                    ecb.call(jsonObject.getString("error"));
+                                }
+                            } else {
+                                ecb.call(getErrorMessage());
+                            }
+                        } catch (Exception e) {
+                            ecb.call(e.toString());
                         }
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                throw new SecurityException();
-            }
-        });
+                });
     }
 }
