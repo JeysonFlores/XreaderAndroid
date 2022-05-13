@@ -28,7 +28,7 @@ import site.xreader.xreaderandroid.utils.UrlBuilder;
 public class SessionFragment extends Fragment {
     EditText cajaUser, cajacontra;
     Button btnConsultar;
-    BackendProxy backend = new BackendProxy();;
+    BackendProxy backend = new BackendProxy();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
