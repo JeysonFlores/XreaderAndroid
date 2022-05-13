@@ -1,19 +1,15 @@
 package site.xreader.xreaderandroid.utils;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.studioidan.httpagent.HttpAgent;
 import com.studioidan.httpagent.StringCallback;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import kotlin.RequiresOptIn;
 import site.xreader.xreaderandroid.callbacks.ErrorCallback;
 import site.xreader.xreaderandroid.callbacks.ListNovelCallback;
 import site.xreader.xreaderandroid.callbacks.SimpleCallback;
@@ -34,7 +30,7 @@ public class BackendProxy {
         return token;
     }
 
-    public void login(Context c, String username, String password, SimpleCallback cb, ErrorCallback ecb) {
+    public void login(String username, String password, SimpleCallback cb, ErrorCallback ecb) {
         RequestParams params = new RequestParams();
 
         params.setParam("name", username);

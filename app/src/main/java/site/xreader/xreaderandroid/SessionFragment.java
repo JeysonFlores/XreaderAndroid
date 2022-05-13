@@ -48,7 +48,7 @@ public class SessionFragment extends Fragment {
                     String user = cajaUser.getText().toString();
                     String pass = cajacontra.getText().toString();
 
-                    backend.login(getContext(), user, pass, () -> {
+                    backend.login(user, pass, () -> {
                         Toast.makeText(getContext(), "Token: " + backend.getToken(), Toast.LENGTH_SHORT).show();
                     }, (error) -> {
                         Toast.makeText(getContext(), "Error: " + error, Toast.LENGTH_SHORT).show();
