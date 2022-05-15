@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/xreader"
-        android:contentDescription="@string/logo" />
+        android:contentDescription="Logo" />
 
     <EditText
         android:id="@+id/txtUsuario"
@@ -34,8 +34,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imaVLogo"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/imaVLogo" />
 
     <EditText
         android:id="@+id/txtContraseña"
@@ -44,7 +43,6 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:autofillHints=""
         android:ems="10"
         android:hint="@string/contrase_a"
         android:inputType="textPassword"
@@ -60,7 +58,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/button_rounded"
-        android:hint="@string/iniciar_sesi_n"
+        android:text="@string/iniciar_sesi_n"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtContraseña" />

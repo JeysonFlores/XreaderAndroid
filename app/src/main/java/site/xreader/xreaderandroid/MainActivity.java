@@ -13,6 +13,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.scenario, new SessionFragment()).commit();
+        fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
     }
 }
