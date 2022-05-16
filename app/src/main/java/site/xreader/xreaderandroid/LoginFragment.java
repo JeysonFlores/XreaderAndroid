@@ -17,11 +17,11 @@ import java.util.regex.Pattern;
 import site.xreader.xreaderandroid.utils.BackendProxy;
 
 public class LoginFragment extends Fragment {
+
     private EditText usernameTxt;
     private EditText passwordTxt;
     private Button loginBtn;
     private Button signupBtn;
-
     private BackendProxy backend;
 
     @Override
@@ -50,8 +50,8 @@ public class LoginFragment extends Fragment {
 
                         switch(error) {
                             case "Wrong credentials":
-                                errMsg = "Usuario o contraseña incorrectos. Verifique la información ant" +
-                                        "antes de continuar.";
+                                errMsg = "Usuario o contraseña incorrectos. Verifique la información" +
+                                        " antes de continuar.";
                                 break;
                             default:
                                 errMsg = "Ha habido un error al hacer el inicio de sesión.";
@@ -73,6 +73,7 @@ public class LoginFragment extends Fragment {
 
                 EditText msgErrorTxt = (EditText) dialog.findViewById(R.id.messageErrorTxt);
                 msgErrorTxt.setText("XDDDDDDDDDDDDDD");
+
                 dialog.getWindow().setBackgroundDrawableResource(R.drawable.modal_rounded);
                 dialog.show();
             }
@@ -94,6 +95,4 @@ public class LoginFragment extends Fragment {
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.modal_rounded);
         dialog.show();
     }
-
-
 }

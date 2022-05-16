@@ -77,7 +77,7 @@
         android:layout_marginBottom="124dp"
         android:background="@drawable/primary_button"
         android:fontFamily="@font/inter_regular"
-        android:text="Iniciar Sesión"
+        android:text="@string/iniciar_sesi_n"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -88,11 +88,53 @@
         android:layout_marginStart="52dp"
         android:layout_marginBottom="44dp"
         android:background="@drawable/white_button"
-        android:text="Crear Cuenta"
+        android:text="@string/crear_cuenta"
         android:textColor="@color/accent"
         android:fontFamily="@font/inter_regular"
         android:textColorHighlight="@color/accent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/usernameIconBack"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="134dp"
+        android:background="@drawable/entryicon_ls_rounded"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/usernameTxt"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionLbl">
+
+        <ImageView
+            android:id="@+id/usernameIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/user48"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/passwordIconBack"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="62dp"
+        android:background="@drawable/entryicon_ls_rounded"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+        app:layout_constraintEnd_toStartOf="@+id/passwordTxt">
+
+        <ImageView
+            android:id="@+id/passwordIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/secret48"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
