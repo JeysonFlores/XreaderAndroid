@@ -1,9 +1,11 @@
 package site.xreader.xreaderandroid;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +46,8 @@ public class LoginFragment extends Fragment {
 
                 if(validateText(username, password)) {
                     backend.login(username, password, () -> {
-                        Toast.makeText(getContext(), "Token: " + backend.getToken(), Toast.LENGTH_SHORT).show();
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.beginTransaction().replace(R.id.scenario, new HomeFragment(backend)).commit();
                     }, (error) -> {
                         String errMsg;
 
@@ -68,14 +71,8 @@ public class LoginFragment extends Fragment {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.error_modal);
-
-                EditText msgErrorTxt = (EditText) dialog.findViewById(R.id.messageErrorTxt);
-                msgErrorTxt.setText("XDDDDDDDDDDDDDD");
-
-                dialog.getWindow().setBackgroundDrawableResource(R.drawable.modal_rounded);
-                dialog.show();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.beginTransaction().replace(R.id.scenario, new SignupFragment()).commit();
             }
         });
 
