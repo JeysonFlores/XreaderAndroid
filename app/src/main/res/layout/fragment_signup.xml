@@ -55,6 +55,7 @@
         android:fontFamily="@font/inter_light"
         android:hint="Nombre"
         android:inputType="textPersonName"
+        android:textColor="@color/accent"
         android:textColorHint="@color/accent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

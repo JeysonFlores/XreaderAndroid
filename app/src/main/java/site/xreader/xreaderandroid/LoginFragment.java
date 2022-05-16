@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -36,6 +37,8 @@ public class LoginFragment extends Fragment {
         loginBtn = (Button) main_view.findViewById(R.id.loginBtn);
         signupBtn = (Button) main_view.findViewById(R.id.signinBtn);
 
+        loginBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+
         backend = new BackendProxy();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +55,7 @@ public class LoginFragment extends Fragment {
                         String errMsg;
 
                         switch(error) {
-                            case "Wrong credentials":
+                            case "WrongCredentials":
                                 errMsg = "Usuario o contraseña incorrectos. Verifique la información" +
                                         " antes de continuar.";
                                 break;

@@ -3,9 +3,11 @@ package site.xreader.xreaderandroid.utils;
 import android.content.Context;
 
 import com.studioidan.httpagent.HttpAgent;
+import com.studioidan.httpagent.JsonCallback;
 import com.studioidan.httpagent.StringCallback;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -52,10 +54,46 @@ public class BackendProxy {
                                     ecb.call(jsonObject.getString("error"));
                                 }
                             } else {
-                                ecb.call(getErrorMessage());
+                                ecb.call("RequestError");
                             }
                         } catch (Exception e) {
-                            ecb.call(e.toString());
+                            ecb.call("ResponseError");
+                        }
+                    }
+                });
+    }
+
+    public void signup(String name, String username, String password, SimpleCallback cb, ErrorCallback ecb) {
+        JSONObject body = new JSONObject();
+
+        try {
+            body.put("name", name);
+            body.put("username", username);
+            body.put("password", password);
+        } catch (JSONException e) {
+            ecb.call("BodyBuildError");
+            return;
+        }
+
+        String URL = API_URL + "/signup";
+
+        HttpAgent.post(URL)
+                .withBody(body.toString())
+                .goJson(new JsonCallback() {
+                    @Override
+                    protected void onDone(boolean success, JSONObject jsonResults) {
+                        try{
+                            if(success) {
+                                if(!jsonResults.isNull("message")) {
+                                    cb.call();
+                                } else {
+                                    ecb.call(jsonResults.getString("error"));
+                                }
+                            } else {
+                                ecb.call("RequestError");
+                            }
+                        } catch (JSONException e) {
+                            ecb.call("ResponseError");
                         }
                     }
                 });
