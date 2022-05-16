@@ -1,7 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/signup_background"
-    tools:context=".SignupFragment" />
+    tools:context=".SignupFragment" >
+
+    <TextView
+        android:id="@+id/signupTitleLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="648dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/crear_cuenta"
+        android:textColor="@color/accent"
+        android:textColorHighlight="@color/accent"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/signupSubtitleLbl"
+        android:layout_width="299dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="524dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Ingresa tus datos para crear tu cuenta de Xreader y en menos de lo que crees podrás acceder a nuestros servicios."
+        android:textColor="@color/accent"
+        android:textColorHighlight="@color/accent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/new_account96"
+        app:layout_constraintBottom_toTopOf="@+id/signupSubtitleLbl"
+        app:layout_constraintStart_toEndOf="@+id/signupTitleLbl" />
+
+    <EditText
+        android:id="@+id/signupUsernameText"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginBottom="372dp"
+        android:background="@drawable/textentry_primary_rounded"
+        android:ems="10"
+        android:fontFamily="@font/inter_light"
+        android:hint="Nombre"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/accent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/signupUserTxt"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/textentry_primary_rounded"
+        android:ems="10"
+        android:fontFamily="@font/inter_light"
+        android:hint="Usuario"
+        android:inputType="textPersonName"
+        android:textColor="@color/accent"
+        android:textColorHint="@color/accent"
+        app:layout_constraintBottom_toTopOf="@+id/signupPasswordTxt"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/signupPasswordTxt"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/textentry_primary_rounded"
+        android:ems="10"
+        android:fontFamily="@font/inter_light"
+        android:hint="@string/contrase_a"
+        android:inputType="textPassword"
+        android:textColor="@color/accent"
+        android:textColorHint="@color/accent"
+        app:layout_constraintBottom_toTopOf="@+id/signupBtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signupUsernameIconBack"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="372dp"
+        android:background="@drawable/entryicon_primary_rounded"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/signupUsernameText">
+
+        <ImageView
+            android:id="@+id/signupUsernameIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/person48"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/signupBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginBottom="102dp"
+        android:background="@drawable/white_button"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/crear_cuenta"
+        android:textColor="@color/accent"
+        android:textColorHint="@color/accent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/toLoginBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginBottom="29dp"
+        android:background="@drawable/primary_button"
+        android:text="@string/iniciar_sesi_n"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signupUserIconBack"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="134dp"
+        android:background="@drawable/entryicon_primary_rounded"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/signupBtn"
+        app:layout_constraintEnd_toStartOf="@+id/signupUserTxt">
+
+        <ImageView
+            android:id="@+id/signupUserIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/user48"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signupPasswordIconBack"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/entryicon_primary_rounded"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/signupBtn"
+        app:layout_constraintEnd_toStartOf="@+id/signupPasswordTxt">
+
+        <ImageView
+            android:id="@+id/signupPasswordIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/secret48"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
