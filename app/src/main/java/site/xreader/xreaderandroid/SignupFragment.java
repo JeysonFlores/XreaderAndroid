@@ -45,8 +45,11 @@ public class SignupFragment extends Fragment {
 
                 if(validateText(user, username, password)) {
                     backend.signup(username, user, password, () -> {
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
+                        StatusDialog.createSuccessDialog(getContext(), "Cuenta creada!",
+                                () -> {
+                                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                                    fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
+                                }).show();
                     }, (error) -> {
                         String errorMsg = null;
 
