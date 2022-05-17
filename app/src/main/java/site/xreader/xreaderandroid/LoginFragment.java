@@ -1,7 +1,6 @@
 package site.xreader.xreaderandroid;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,11 +12,11 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.util.regex.Pattern;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import site.xreader.xreaderandroid.utils.BackendProxy;
+import site.xreader.xreaderandroid.utils.StatusDialog;
 
 public class LoginFragment extends Fragment {
 
@@ -63,10 +62,10 @@ public class LoginFragment extends Fragment {
                                 errMsg = "Ha habido un error al hacer el inicio de sesión.";
                         }
 
-                        showErrorDialog(errMsg);
+                        StatusDialog.createErrorDialog(getContext(), errMsg).show();
                     });
                 } else {
-                    showErrorDialog("Ingrese datos válidos por favor.");
+                    StatusDialog.createErrorDialog(getContext(), "Ingrese datos válidos por favor.").show();
                 }
             }
         });
@@ -84,15 +83,5 @@ public class LoginFragment extends Fragment {
 
     private boolean validateText(String username, String password) {
         return !(username.replace(" ", "") == "" || password.replace(" ", "") == "");
-    }
-
-    private void showErrorDialog(String msg) {
-        Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.error_modal);
-
-        EditText msgErrorTxt = (EditText) dialog.findViewById(R.id.messageErrorTxt);
-        msgErrorTxt.setText(msg);
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.modal_rounded);
-        dialog.show();
     }
 }

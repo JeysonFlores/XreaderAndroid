@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import site.xreader.xreaderandroid.utils.BackendProxy;
+import site.xreader.xreaderandroid.utils.StatusDialog;
 
 public class SignupFragment extends Fragment {
 
@@ -61,7 +62,7 @@ public class SignupFragment extends Fragment {
                                 errorMsg = "Hubo un error";
                         }
 
-                        Toast.makeText(getContext(), errorMsg, Toast.LENGTH_SHORT).show();
+                        StatusDialog.createErrorDialog(getContext(), errorMsg).show();
                     });
                 } else {
                     Toast.makeText(getContext(), "Los campos no están completos. Verifíquelos.", Toast.LENGTH_SHORT).show();
