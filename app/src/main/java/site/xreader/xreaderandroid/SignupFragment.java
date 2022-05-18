@@ -13,18 +13,18 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import site.xreader.xreaderandroid.utils.BackendProxy;
-import site.xreader.xreaderandroid.utils.StatusDialog;
+import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 public class SignupFragment extends Fragment {
 
     private TextView titleLbl;
     private TextView subtitleLbl;
+    private ImageView imageImg;
     private EditText userTxt;
     private EditText usernameTxt;
     private EditText passwordTxt;
@@ -44,6 +44,7 @@ public class SignupFragment extends Fragment {
 
         titleLbl = (TextView) main_view.findViewById(R.id.signupTitleLbl);
         subtitleLbl = (TextView) main_view.findViewById(R.id.signupSubtitleLbl);
+        imageImg = (ImageView) main_view.findViewById(R.id.signupImage);
         userTxt = (EditText) main_view.findViewById(R.id.signupUserTxt);
         userIcon = (ConstraintLayout) main_view.findViewById(R.id.signupUserIconBack);
         usernameTxt = (EditText) main_view.findViewById(R.id.signupUsernameText);
@@ -56,6 +57,7 @@ public class SignupFragment extends Fragment {
 
         titleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         subtitleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
+        imageImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         userTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         userIcon.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         usernameTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
@@ -73,6 +75,8 @@ public class SignupFragment extends Fragment {
                 String password = passwordTxt.getText().toString();
 
                 if(validateText(user, username, password)) {
+                    signupBtn.setEnabled(false);
+
                     backend.signup(username, user, password, () -> {
                         StatusDialog.createSuccessDialog(getContext(), "Cuenta creada!",
                                 () -> {
@@ -94,6 +98,7 @@ public class SignupFragment extends Fragment {
                                 errorMsg = "Hubo un error";
                         }
 
+                        signupBtn.setEnabled(true);
                         StatusDialog.createErrorDialog(getContext(), errorMsg).show();
                     });
                 } else {

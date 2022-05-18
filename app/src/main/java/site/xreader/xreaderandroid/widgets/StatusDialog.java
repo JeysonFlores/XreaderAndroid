@@ -1,4 +1,4 @@
-package site.xreader.xreaderandroid.utils;
+package site.xreader.xreaderandroid.widgets;
 
 import android.app.Dialog;
 import android.content.Context;

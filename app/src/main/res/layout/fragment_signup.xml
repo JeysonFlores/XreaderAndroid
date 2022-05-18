@@ -35,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/signupImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="41dp"

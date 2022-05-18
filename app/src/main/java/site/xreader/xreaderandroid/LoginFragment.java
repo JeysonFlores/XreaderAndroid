@@ -1,6 +1,5 @@
 package site.xreader.xreaderandroid;
 
-import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,13 +13,10 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import site.xreader.xreaderandroid.utils.BackendProxy;
-import site.xreader.xreaderandroid.utils.StatusDialog;
+import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 public class LoginFragment extends Fragment {
 
@@ -68,6 +64,8 @@ public class LoginFragment extends Fragment {
                 String password = passwordTxt.getText().toString();
 
                 if(validateText(username, password)) {
+                    loginBtn.setEnabled(false);
+
                     backend.login(username, password, () -> {
                         FragmentManager fm = getActivity().getSupportFragmentManager();
                         fm.beginTransaction().replace(R.id.scenario, new HomeFragment(backend)).commit();
@@ -83,6 +81,7 @@ public class LoginFragment extends Fragment {
                                 errMsg = "Ha habido un error al hacer el inicio de sesión.";
                         }
 
+                        loginBtn.setEnabled(true);
                         StatusDialog.createErrorDialog(getContext(), errMsg).show();
                     });
                 } else {
