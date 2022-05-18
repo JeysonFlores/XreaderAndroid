@@ -17,9 +17,9 @@ public class SplashFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View main_view = inflater.inflate(R.layout.fragment_splash,container,false);
+        View mainView = inflater.inflate(R.layout.fragment_splash,container,false);
 
-        ImageView logoImg = (ImageView) main_view.findViewById(R.id.splashLogoImg);
+        ImageView logoImg = (ImageView) mainView.findViewById(R.id.splashLogoImg);
 
         logoImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.rotate));
 
@@ -31,6 +31,6 @@ public class SplashFragment extends Fragment {
             }
         }, 3000);
 
-        return main_view;
+        return mainView;
     }
 }

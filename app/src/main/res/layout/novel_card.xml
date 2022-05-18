@@ -6,6 +6,7 @@
     android:layout_height="240dp"
     android:background="#FFFFFF"
     android:orientation="vertical"
+    android:layout_marginRight="5dp"
     android:padding="@dimen/widget_margin"
     android:theme="@style/Theme.XreaderAndroid"
     app:cardBackgroundColor="@android:color/transparent"

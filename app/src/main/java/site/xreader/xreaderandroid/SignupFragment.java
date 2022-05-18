@@ -38,21 +38,21 @@ public class SignupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View main_view = inflater.inflate(R.layout.fragment_signup,container,false);
+        View mainView = inflater.inflate(R.layout.fragment_signup,container,false);
         TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
         setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
-        titleLbl = (TextView) main_view.findViewById(R.id.signupTitleLbl);
-        subtitleLbl = (TextView) main_view.findViewById(R.id.signupSubtitleLbl);
-        imageImg = (ImageView) main_view.findViewById(R.id.signupImage);
-        userTxt = (EditText) main_view.findViewById(R.id.signupUserTxt);
-        userIcon = (ConstraintLayout) main_view.findViewById(R.id.signupUserIconBack);
-        usernameTxt = (EditText) main_view.findViewById(R.id.signupUsernameText);
-        usernameIcon = (ConstraintLayout) main_view.findViewById(R.id.signupUsernameIconBack);
-        passwordTxt = (EditText) main_view.findViewById(R.id.signupPasswordTxt);
-        passwordIcon = (ConstraintLayout) main_view.findViewById(R.id.signupPasswordIconBack);
-        signupBtn = (Button) main_view.findViewById(R.id.signupBtn);
-        loginBtn = (Button) main_view.findViewById(R.id.toLoginBtn);
+        titleLbl = (TextView) mainView.findViewById(R.id.signupTitleLbl);
+        subtitleLbl = (TextView) mainView.findViewById(R.id.signupSubtitleLbl);
+        imageImg = (ImageView) mainView.findViewById(R.id.signupImage);
+        userTxt = (EditText) mainView.findViewById(R.id.signupUserTxt);
+        userIcon = (ConstraintLayout) mainView.findViewById(R.id.signupUserIconBack);
+        usernameTxt = (EditText) mainView.findViewById(R.id.signupUsernameText);
+        usernameIcon = (ConstraintLayout) mainView.findViewById(R.id.signupUsernameIconBack);
+        passwordTxt = (EditText) mainView.findViewById(R.id.signupPasswordTxt);
+        passwordIcon = (ConstraintLayout) mainView.findViewById(R.id.signupPasswordIconBack);
+        signupBtn = (Button) mainView.findViewById(R.id.signupBtn);
+        loginBtn = (Button) mainView.findViewById(R.id.toLoginBtn);
         backend = new BackendProxy();
 
         titleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
@@ -115,7 +115,7 @@ public class SignupFragment extends Fragment {
             }
         });
 
-        return main_view;
+        return mainView;
     }
 
     public boolean validateText(String name, String username, String password) {

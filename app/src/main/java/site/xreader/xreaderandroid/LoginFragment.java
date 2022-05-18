@@ -33,18 +33,18 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View main_view = inflater.inflate(R.layout.fragment_login,container,false);
+        View mainView = inflater.inflate(R.layout.fragment_login,container,false);
         TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
         setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
-        titleLbl = (TextView) main_view.findViewById(R.id.titleLbl);
-        subtitleLbl = (TextView) main_view.findViewById(R.id.descriptionLbl);
-        usernameTxt = (EditText) main_view.findViewById(R.id.usernameTxt);
-        passwordTxt = (EditText) main_view.findViewById(R.id.passwordTxt);
-        usernameIcon = (ConstraintLayout) main_view.findViewById(R.id.usernameIconBack);
-        passwordIcon = (ConstraintLayout) main_view.findViewById(R.id.passwordIconBack);
-        loginBtn = (Button) main_view.findViewById(R.id.loginBtn);
-        signupBtn = (Button) main_view.findViewById(R.id.signinBtn);
+        titleLbl = (TextView) mainView.findViewById(R.id.titleLbl);
+        subtitleLbl = (TextView) mainView.findViewById(R.id.descriptionLbl);
+        usernameTxt = (EditText) mainView.findViewById(R.id.usernameTxt);
+        passwordTxt = (EditText) mainView.findViewById(R.id.passwordTxt);
+        usernameIcon = (ConstraintLayout) mainView.findViewById(R.id.usernameIconBack);
+        passwordIcon = (ConstraintLayout) mainView.findViewById(R.id.passwordIconBack);
+        loginBtn = (Button) mainView.findViewById(R.id.loginBtn);
+        signupBtn = (Button) mainView.findViewById(R.id.signinBtn);
 
         titleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         subtitleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
@@ -98,7 +98,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        return main_view;
+        return mainView;
     }
 
     private boolean validateText(String username, String password) {

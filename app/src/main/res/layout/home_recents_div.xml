@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="330dp">
+    android:layout_height="350dp">
 
     <TextView
         android:id="@+id/homeRecentTitleLbl"
@@ -22,7 +22,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homeRecentView"
         android:layout_width="380dp"
-        android:layout_height="240dp"
+        android:layout_height="250dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="11dp"
         app:layout_constraintStart_toStartOf="parent"
