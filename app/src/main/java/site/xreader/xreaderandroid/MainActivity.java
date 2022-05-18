@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentManager fm = getSupportFragmentManager();
-        //fm.beginTransaction().replace(R.id.scenario, new SplashFragment()).commit();
-        fm.beginTransaction().replace(R.id.scenario, new HomeFragment(new BackendProxy())).commit();
+        fm.beginTransaction().replace(R.id.scenario, new SplashFragment()).commit();
+        //fm.beginTransaction().replace(R.id.scenario, new HomeFragment(new BackendProxy())).commit();
     }
 }

@@ -45,24 +45,21 @@ public class SessionFragment extends Fragment {
         btnConsultar = (Button) vista.findViewById(R.id.btnSesion);
 
 
-        btnConsultar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    String user = cajaUser.getText().toString();
-                    String pass = cajacontra.getText().toString();
+        btnConsultar.setOnClickListener((v) -> {
+            try {
+                String user = cajaUser.getText().toString();
+                String pass = cajacontra.getText().toString();
 
-                    backend.login(user, pass, () -> {
-                        Toast.makeText(getContext(), "Token: " + backend.getToken(), Toast.LENGTH_SHORT).show();
-                    }, (error) -> {
-                        Toast.makeText(getContext(), "Error: " + error, Toast.LENGTH_SHORT).show();
-                    });
+                backend.login(user, pass, () -> {
+                    Toast.makeText(getContext(), "Token: " + backend.getToken(), Toast.LENGTH_SHORT).show();
+                }, (error) -> {
+                    Toast.makeText(getContext(), "Error: " + error, Toast.LENGTH_SHORT).show();
+                });
 
-                } catch (Exception e) {
-                    Toast.makeText(getContext(), "Hubo un error en el inicio de sesion" + e.toString(), Toast.LENGTH_SHORT).show();
-                }
-
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Hubo un error en el inicio de sesion" + e.toString(), Toast.LENGTH_SHORT).show();
             }
+
         });
 
 

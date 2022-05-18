@@ -26,12 +26,7 @@ public class StatusDialog {
         msgErrorLbl.startAnimation(AnimationUtils.loadAnimation(context, R.anim.bounce));
         closeBtn.startAnimation(AnimationUtils.loadAnimation(context, R.anim.bounce));
 
-        closeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.hide();
-            }
-        });
+        closeBtn.setOnClickListener(v -> dialog.hide());
 
         msgErrorLbl.setText(message);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.modal_rounded);
@@ -53,12 +48,9 @@ public class StatusDialog {
         msgErrorLbl.startAnimation(AnimationUtils.loadAnimation(context, R.anim.bounce));
         closeBtn.startAnimation(AnimationUtils.loadAnimation(context, R.anim.bounce));
 
-        closeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cb.call();
-                dialog.hide();
-            }
+        closeBtn.setOnClickListener((v) -> {
+            cb.call();
+            dialog.hide();
         });
 
         msgErrorLbl.setText(message);
@@ -81,12 +73,7 @@ public class StatusDialog {
         msgErrorLbl.startAnimation(AnimationUtils.loadAnimation(context, R.anim.bounce));
         closeBtn.startAnimation(AnimationUtils.loadAnimation(context, R.anim.bounce));
 
-        closeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.hide();
-            }
-        });
+        closeBtn.setOnClickListener((v) -> dialog.hide());
 
         msgErrorLbl.setText(message);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.modal_rounded);
@@ -108,12 +95,9 @@ public class StatusDialog {
         msgErrorLbl.startAnimation(AnimationUtils.loadAnimation(context, R.anim.bounce));
         closeBtn.startAnimation(AnimationUtils.loadAnimation(context, R.anim.bounce));
 
-        closeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cb.call();
-                dialog.hide();
-            }
+        closeBtn.setOnClickListener((v) -> {
+            cb.call();
+            dialog.hide();
         });
 
         msgErrorLbl.setText(message);

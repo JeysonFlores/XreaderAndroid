@@ -57,45 +57,39 @@ public class LoginFragment extends Fragment {
 
         backend = new BackendProxy();
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameTxt.getText().toString();
-                String password = passwordTxt.getText().toString();
+        loginBtn.setOnClickListener((v) -> {
+            String username = usernameTxt.getText().toString();
+            String password = passwordTxt.getText().toString();
 
-                if(validateText(username, password)) {
-                    loginBtn.setEnabled(false);
+            if(validateText(username, password)) {
+                loginBtn.setEnabled(false);
 
-                    backend.login(username, password, () -> {
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        fm.beginTransaction().replace(R.id.scenario, new HomeFragment(backend)).commit();
-                    }, (error) -> {
-                        String errMsg;
+                backend.login(username, password, () -> {
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.beginTransaction().replace(R.id.scenario, new HomeFragment(backend)).commit();
+                }, (error) -> {
+                    String errMsg;
 
-                        switch(error) {
-                            case "WrongCredentials":
-                                errMsg = "Usuario o contraseña incorrectos. Verifique la información" +
-                                        " antes de continuar.";
-                                break;
-                            default:
-                                errMsg = "Ha habido un error al hacer el inicio de sesión.";
-                        }
+                    switch(error) {
+                        case "WrongCredentials":
+                            errMsg = "Usuario o contraseña incorrectos. Verifique la información" +
+                                    " antes de continuar.";
+                            break;
+                        default:
+                            errMsg = "Ha habido un error al hacer el inicio de sesión.";
+                    }
 
-                        loginBtn.setEnabled(true);
-                        StatusDialog.createErrorDialog(getContext(), errMsg).show();
-                    });
-                } else {
-                    StatusDialog.createErrorDialog(getContext(), "Ingrese datos válidos por favor.").show();
-                }
+                    loginBtn.setEnabled(true);
+                    StatusDialog.createErrorDialog(getContext(), errMsg).show();
+                });
+            } else {
+                StatusDialog.createErrorDialog(getContext(), "Ingrese datos válidos por favor.").show();
             }
         });
 
-        signupBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.beginTransaction().replace(R.id.scenario, new SignupFragment()).commit();
-            }
+        signupBtn.setOnClickListener((v) -> {
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.scenario, new SignupFragment()).commit();
         });
 
         return mainView;

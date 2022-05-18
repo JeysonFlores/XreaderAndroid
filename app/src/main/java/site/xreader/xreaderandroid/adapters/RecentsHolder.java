@@ -25,32 +25,14 @@ public class RecentsHolder extends RecyclerView.ViewHolder {
     private ImageView novelImg;
     private TextView novelLbl;
     private CardView novelCard;
-    private NovelCallback onClickListener;
 
-    public RecentsHolder(@NonNull @NotNull View itemView) {
+    public RecentsHolder(@NonNull @NotNull View itemView, NovelCallback onClickListener) {
         super(itemView);
         novelImg = (ImageView) itemView.findViewById(R.id.novelCardImg);
         novelLbl = (TextView) itemView.findViewById(R.id.novelCardLbl);
         novelCard = (CardView) itemView.findViewById(R.id.novelCard);
 
-        novelCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickListener.call(data);
-            }
-        });
-    }
-
-    public NovelCallback getOnClickListener() {
-        return onClickListener;
-    }
-
-    public void setOnClickListener(NovelCallback onClickListener) {
-        this.onClickListener = onClickListener;
-    }
-
-    public Novel getData() {
-        return data;
+        novelCard.setOnClickListener(view -> onClickListener.call(data));
     }
 
     public void setData(Novel data, Context context) {

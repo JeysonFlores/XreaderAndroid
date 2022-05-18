@@ -23,12 +23,9 @@ public class SplashFragment extends Fragment {
 
         logoImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.rotate));
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
-            }
+        new Handler().postDelayed(() -> {
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
         }, 3000);
 
         return mainView;

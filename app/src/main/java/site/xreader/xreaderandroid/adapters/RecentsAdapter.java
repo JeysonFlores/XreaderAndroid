@@ -44,13 +44,12 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsHolder> {
         CardView mainView = (CardView) card.findViewById(R.id.novelCard);
         mainView.setCardBackgroundColor(card.getResources().getColor(R.color.gray_util));
 
-        return new RecentsHolder(card);
+        return new RecentsHolder(card, elementClickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecentsHolder holder, int position) {
         holder.setData(data.get(position), context);
-        holder.setOnClickListener(elementClickListener);
     }
 
     @Override

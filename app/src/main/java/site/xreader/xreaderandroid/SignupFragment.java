@@ -67,52 +67,46 @@ public class SignupFragment extends Fragment {
         signupBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         loginBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
-        signupBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String user = userTxt.getText().toString();
-                String username = usernameTxt.getText().toString();
-                String password = passwordTxt.getText().toString();
+        signupBtn.setOnClickListener((v) -> {
+            String user = userTxt.getText().toString();
+            String username = usernameTxt.getText().toString();
+            String password = passwordTxt.getText().toString();
 
-                if(validateText(user, username, password)) {
-                    signupBtn.setEnabled(false);
+            if(validateText(user, username, password)) {
+                signupBtn.setEnabled(false);
 
-                    backend.signup(username, user, password, () -> {
-                        StatusDialog.createSuccessDialog(getContext(), "Cuenta creada!",
-                                () -> {
-                                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                                    fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
-                                }).show();
-                    }, (error) -> {
-                        String errorMsg = null;
+                backend.signup(username, user, password, () -> {
+                    StatusDialog.createSuccessDialog(getContext(), "Cuenta creada!",
+                            () -> {
+                                FragmentManager fm = getActivity().getSupportFragmentManager();
+                                fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
+                            }).show();
+                }, (error) -> {
+                    String errorMsg = null;
 
-                        switch (error) {
-                            case "UserExists":
-                                errorMsg = "Ya existe ese nombre de usuario";
-                                break;
-                            case "RequestError":
-                                break;
-                            case "ResponseError":
-                                break;
-                            default:
-                                errorMsg = "Hubo un error";
-                        }
+                    switch (error) {
+                        case "UserExists":
+                            errorMsg = "Ya existe ese nombre de usuario";
+                            break;
+                        case "RequestError":
+                            break;
+                        case "ResponseError":
+                            break;
+                        default:
+                            errorMsg = "Hubo un error";
+                    }
 
-                        signupBtn.setEnabled(true);
-                        StatusDialog.createErrorDialog(getContext(), errorMsg).show();
-                    });
-                } else {
-                    Toast.makeText(getContext(), "Los campos no están completos. Verifíquelos.", Toast.LENGTH_SHORT).show();
-                }
+                    signupBtn.setEnabled(true);
+                    StatusDialog.createErrorDialog(getContext(), errorMsg).show();
+                });
+            } else {
+                Toast.makeText(getContext(), "Los campos no están completos. Verifíquelos.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
-            }
+        loginBtn.setOnClickListener((v) -> {
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
         });
 
         return mainView;
