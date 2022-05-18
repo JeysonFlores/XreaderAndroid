@@ -18,9 +18,10 @@ public class SplashFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View main_view = inflater.inflate(R.layout.fragment_splash,container,false);
+
         ImageView logoImg = (ImageView) main_view.findViewById(R.id.splashLogoImg);
 
-        logoImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
+        logoImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.rotate));
 
         new Handler().postDelayed(new Runnable() {
             @Override

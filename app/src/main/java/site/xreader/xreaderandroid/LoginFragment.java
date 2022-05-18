@@ -3,9 +3,11 @@ package site.xreader.xreaderandroid;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +17,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import site.xreader.xreaderandroid.utils.BackendProxy;
 import site.xreader.xreaderandroid.utils.StatusDialog;
 
 public class LoginFragment extends Fragment {
 
+    private TextView titleLbl;
+    private TextView subtitleLbl;
     private EditText usernameTxt;
     private EditText passwordTxt;
+    private ConstraintLayout usernameIcon;
+    private ConstraintLayout passwordIcon;
     private Button loginBtn;
     private Button signupBtn;
     private BackendProxy backend;
@@ -30,13 +38,26 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View main_view = inflater.inflate(R.layout.fragment_login,container,false);
+        TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
+        setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
+        titleLbl = (TextView) main_view.findViewById(R.id.titleLbl);
+        subtitleLbl = (TextView) main_view.findViewById(R.id.descriptionLbl);
         usernameTxt = (EditText) main_view.findViewById(R.id.usernameTxt);
         passwordTxt = (EditText) main_view.findViewById(R.id.passwordTxt);
+        usernameIcon = (ConstraintLayout) main_view.findViewById(R.id.usernameIconBack);
+        passwordIcon = (ConstraintLayout) main_view.findViewById(R.id.passwordIconBack);
         loginBtn = (Button) main_view.findViewById(R.id.loginBtn);
         signupBtn = (Button) main_view.findViewById(R.id.signinBtn);
 
+        titleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
+        subtitleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
+        usernameTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        usernameIcon.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        passwordTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        passwordIcon.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         loginBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        signupBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
         backend = new BackendProxy();
 
