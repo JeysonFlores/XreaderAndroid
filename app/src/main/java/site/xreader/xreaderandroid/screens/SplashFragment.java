@@ -19,13 +19,18 @@ public class SplashFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // View initializing
         View mainView = inflater.inflate(R.layout.fragment_splash,container,false);
 
+        // Setting up the UI elements
         ImageView logoImg = (ImageView) mainView.findViewById(R.id.splashLogoImg);
 
+        // Triggering UI elements' animations
         logoImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.rotate));
 
+        // Events handling
         new Handler().postDelayed(() -> {
+            // Screen change to Login
             FragmentManager fm = getActivity().getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
         }, 3000);

@@ -10,6 +10,17 @@
     <string name="inicia_sesion_en_tu_cuenta_para_disfrutar_de_nuestro_servicio_de_novelas">Inicia sesión en tu cuenta para disfrutar de nuestro servicio de novelas</string>
     <string name="crear_cuenta">Crear Cuenta</string>
     <string name="appwidget_text">EXAMPLE</string>
+    <string name="logout_title">Cerrar Sesión</string>
+    <string name="logout_message">Está a punto de cerrar sesión. ¿Está seguro que quiere continuar?</string>
     <string name="add_widget">Add widget</string>
+
+    <string name="connection_error">Hubo un error de conexión. Inténtelo más tarde.</string>
+    <string name="login_error">Ha habido un error al hacer el inicio de sesión.</string>
+    <string name="wrong_credentials_error">Usuario o contraseña incorrectos. Verifique la información antes de continuar.</string>
+    <string name="validation_error">Ingrese datos válidos por favor.</string>
+
+    <string name="signup_error">Ha habido un error al hacer el crear la cuenta.</string>
+    <string name="account_created">¡Cuenta creada!</string>
+    <string name="user_exists_error">Ya existe ese nombre de usuario</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan. Diam maecenas sed enim ut sem. Erat nam at lectus urna. Aenean vel elit scelerisque mauris pellentesque pulvinar. Sed euismod nisi porta lorem. Orci porta non pulvinar neque laoreet suspendisse interdum consectetur libero.</string>
 </resources>

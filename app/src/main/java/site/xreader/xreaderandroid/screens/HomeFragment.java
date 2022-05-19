@@ -52,8 +52,7 @@ public class HomeFragment extends Fragment {
         logoutBtn.setOnClickListener((v) -> {
             logoutBtn.setEnabled(false);
 
-            DecisionDialog.create(getContext(), "Cerrar Sesión", "Está " +
-                    "a punto de cerrar sesión. ¿Está seguro que quiere continuar?",
+            DecisionDialog.create(getContext(), getString(R.string.logout_title), getString(R.string.logout_message),
                     () -> {
                         FragmentManager fm = getActivity().getSupportFragmentManager();
                         fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
@@ -76,7 +75,7 @@ public class HomeFragment extends Fragment {
             recentRv.setAdapter(adapter);
             recentRv.setLayoutManager(linearMng);
         }, (error) -> {
-            StatusDialog.createError(getContext(), "Hubo un error de conexión, inténtalo más tarde",
+            StatusDialog.createError(getContext(), getString(R.string.connection_error),
                     () -> {
                         FragmentManager fm = getActivity().getSupportFragmentManager();
                         fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();

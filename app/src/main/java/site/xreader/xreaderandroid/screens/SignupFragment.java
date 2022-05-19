@@ -39,10 +39,12 @@ public class SignupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // View initializing
         View mainView = inflater.inflate(R.layout.fragment_signup,container,false);
         TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
         setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
+        // Setting up the UI elements
         titleLbl = (TextView) mainView.findViewById(R.id.signupTitleLbl);
         subtitleLbl = (TextView) mainView.findViewById(R.id.signupSubtitleLbl);
         imageImg = (ImageView) mainView.findViewById(R.id.signupImage);
@@ -54,8 +56,8 @@ public class SignupFragment extends Fragment {
         passwordIcon = (ConstraintLayout) mainView.findViewById(R.id.signupPasswordIconBack);
         signupBtn = (Button) mainView.findViewById(R.id.signupBtn);
         loginBtn = (Button) mainView.findViewById(R.id.toLoginBtn);
-        backend = new BackendProxy();
 
+        // Triggering UI elements' animations
         titleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         subtitleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         imageImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
@@ -68,33 +70,41 @@ public class SignupFragment extends Fragment {
         signupBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         loginBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
+        // API connection proxy initializing
+        backend = new BackendProxy();
+
+        // Events handling
         signupBtn.setOnClickListener((v) -> {
             String user = userTxt.getText().toString();
             String username = usernameTxt.getText().toString();
             String password = passwordTxt.getText().toString();
 
+            // Validating form data
             if(validateText(user, username, password)) {
                 signupBtn.setEnabled(false);
 
+                // API signup request
                 backend.signup(username, user, password, () -> {
-                    StatusDialog.createSuccess(getContext(), "Cuenta creada!",
+                    // On success: display success message and Screen change to Login
+                    StatusDialog.createSuccess(getContext(), getString(R.string.account_created),
                             () -> {
                                 FragmentManager fm = getActivity().getSupportFragmentManager();
                                 fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
                             }).show();
                 }, (error) -> {
+                    // On error: display error
                     String errorMsg = null;
 
                     switch (error) {
                         case "UserExists":
-                            errorMsg = "Ya existe ese nombre de usuario";
+                            errorMsg = getString(R.string.user_exists_error);
                             break;
                         case "RequestError":
                             break;
                         case "ResponseError":
                             break;
                         default:
-                            errorMsg = "Hubo un error";
+                            errorMsg = getString(R.string.signup_error);
                     }
 
                     signupBtn.setEnabled(true);
@@ -106,6 +116,7 @@ public class SignupFragment extends Fragment {
         });
 
         loginBtn.setOnClickListener((v) -> {
+            // Screen change to Login
             FragmentManager fm = getActivity().getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
         });

@@ -16,16 +16,16 @@ import java.util.ArrayList;
 
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.callbacks.VolumeCallback;
-import site.xreader.xreaderandroid.holders.NovelsListHolder;
+import site.xreader.xreaderandroid.holders.VolumesListHolder;
 import site.xreader.xreaderandroid.models.Volume;
 
-public class NovelsListAdapter extends RecyclerView.Adapter<NovelsListHolder> {
+public class VolumesListAdapter extends RecyclerView.Adapter<VolumesListHolder> {
 
     private Context context;
     private ArrayList<Volume> data;
     private VolumeCallback elementClickListener;
 
-    public NovelsListAdapter(Context context, ArrayList<Volume> data){
+    public VolumesListAdapter(Context context, ArrayList<Volume> data){
         this.context = context;
         this.data = data;
     }
@@ -37,7 +37,7 @@ public class NovelsListAdapter extends RecyclerView.Adapter<NovelsListHolder> {
     @NonNull
     @NotNull
     @Override
-    public NovelsListHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public VolumesListHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(context).inflate(R.layout.volume_item, parent, false);
 
         ConstraintLayout mainView = (ConstraintLayout) item.findViewById(R.id.novelItemView);
@@ -45,11 +45,11 @@ public class NovelsListAdapter extends RecyclerView.Adapter<NovelsListHolder> {
 
         item.startAnimation(AnimationUtils.loadAnimation(context, R.anim.lefttoright));
 
-        return new NovelsListHolder(item, elementClickListener);
+        return new VolumesListHolder(item, elementClickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull NovelsListHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull VolumesListHolder holder, int position) {
         holder.setData(data.get(position), context);
     }
 

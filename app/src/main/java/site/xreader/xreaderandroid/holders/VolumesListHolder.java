@@ -17,14 +17,14 @@ import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.callbacks.VolumeCallback;
 import site.xreader.xreaderandroid.models.Volume;
 
-public class NovelsListHolder extends RecyclerView.ViewHolder {
+public class VolumesListHolder extends RecyclerView.ViewHolder {
 
     private Volume data;
     private ImageView volumeImg;
     private TextView nameLbl;
     private ImageButton startReadingBtn;
 
-    public NovelsListHolder(@NonNull @NotNull View itemView, VolumeCallback onClickListener) {
+    public VolumesListHolder(@NonNull @NotNull View itemView, VolumeCallback onClickListener) {
         super(itemView);
         volumeImg = (ImageView) itemView.findViewById(R.id.novelItemImg);
         nameLbl = (TextView) itemView.findViewById(R.id.novelItemNameLbl);

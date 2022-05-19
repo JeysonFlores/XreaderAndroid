@@ -34,10 +34,12 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // View initializing
         View mainView = inflater.inflate(R.layout.fragment_login,container,false);
         TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
         setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
+        // Setting up the UI elements
         titleLbl = (TextView) mainView.findViewById(R.id.titleLbl);
         subtitleLbl = (TextView) mainView.findViewById(R.id.descriptionLbl);
         usernameTxt = (EditText) mainView.findViewById(R.id.usernameTxt);
@@ -47,6 +49,7 @@ public class LoginFragment extends Fragment {
         loginBtn = (Button) mainView.findViewById(R.id.loginBtn);
         signupBtn = (Button) mainView.findViewById(R.id.signinBtn);
 
+        // Triggering UI elements' animations
         titleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         subtitleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         usernameTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
@@ -56,39 +59,45 @@ public class LoginFragment extends Fragment {
         loginBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         signupBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
+        // API connection proxy initializing
         backend = new BackendProxy();
 
+        // Events handling
         loginBtn.setOnClickListener((v) -> {
             String username = usernameTxt.getText().toString();
             String password = passwordTxt.getText().toString();
 
+            // Validating form data
             if(validateText(username, password)) {
                 loginBtn.setEnabled(false);
 
+                // API login request
                 backend.login(username, password, () -> {
+                    // On success: Screen change to Home
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.beginTransaction().replace(R.id.scenario, new HomeFragment(backend)).commit();
                 }, (error) -> {
+                    // On error: display error
                     String errMsg;
 
                     switch(error) {
                         case "WrongCredentials":
-                            errMsg = "Usuario o contraseña incorrectos. Verifique la información" +
-                                    " antes de continuar.";
+                            errMsg = getString(R.string.wrong_credentials_error);
                             break;
                         default:
-                            errMsg = "Ha habido un error al hacer el inicio de sesión.";
+                            errMsg = getString(R.string.login_error);
                     }
 
                     loginBtn.setEnabled(true);
                     StatusDialog.createError(getContext(), errMsg).show();
                 });
             } else {
-                StatusDialog.createError(getContext(), "Ingrese datos válidos por favor.").show();
+                StatusDialog.createError(getContext(), getString(R.string.validation_error)).show();
             }
         });
 
         signupBtn.setOnClickListener((v) -> {
+            // Screen change to Signup
             FragmentManager fm = getActivity().getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.scenario, new SignupFragment()).commit();
         });
