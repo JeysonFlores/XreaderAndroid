@@ -15,14 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.adapters.RecentsAdapter;
 import site.xreader.xreaderandroid.models.Novel;
-import site.xreader.xreaderandroid.screens.LoginFragment;
 import site.xreader.xreaderandroid.utils.BackendProxy;
 import site.xreader.xreaderandroid.widgets.DecisionDialog;
 
@@ -63,27 +61,23 @@ public class HomeFragment extends Fragment {
             }).show();
         });
 
-        ArrayList<Novel> data = new ArrayList<>();
-        String URL = "https://kbimages1-a.akamaihd.net/3e366a18-3d05-4898-a371-ab8cca70eb00/1200/1200/False/overlord-vol-8-light-novel.jpg";
-        data.add(new Novel(0, "Overlord", "Si", "Yo", URL, 2009));
-        URL = "https://cdn.pixabay.com/photo/2021/04/21/10/17/meme-6195988_960_720.png";
-        data.add(new Novel(1, "Amogus", "Si", "Yo", URL, 2009));
-        URL = "https://kbimages1-a.akamaihd.net/3e366a18-3d05-4898-a371-ab8cca70eb00/1200/1200/False/overlord-vol-8-light-novel.jpg";
-        data.add(new Novel(2, "Overlord", "Si", "Yo", URL, 2009));
-        data.add(new Novel(3, "Overlord", "Si", "Yo", URL, 2009));
+        backend.getNovels((novels) -> {
+            recentRv = (RecyclerView) mainView.findViewById(R.id.homeRecentView);
 
-        recentRv = (RecyclerView) mainView.findViewById(R.id.homeRecentView);
+            linearMng = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
-        linearMng = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            adapter = new RecentsAdapter(getContext(), novels);
+            adapter.setElementClickListener((novel) -> {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.beginTransaction().replace(R.id.scenario, new NovelDescriptionFragment(this, backend, novel)).commit();
+            });
 
-        adapter = new RecentsAdapter(getContext(), data);
-        adapter.setElementClickListener((novel) -> {
-            Toast.makeText(getContext(), novel.name + "-" + novel.id, Toast.LENGTH_SHORT).show();
+            recentRv.setAdapter(adapter);
+            recentRv.setLayoutManager(linearMng);
+        }, (error) -> {
+
         });
-
-        recentRv.setAdapter(adapter);
-        recentRv.setLayoutManager(linearMng);
-
+        
         return mainView;
     }
 }
