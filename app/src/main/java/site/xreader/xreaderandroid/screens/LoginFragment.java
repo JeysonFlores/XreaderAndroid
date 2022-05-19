@@ -1,4 +1,4 @@
-package site.xreader.xreaderandroid;
+package site.xreader.xreaderandroid.screens;
 
 import android.os.Bundle;
 
@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.utils.BackendProxy;
 import site.xreader.xreaderandroid.widgets.StatusDialog;
 

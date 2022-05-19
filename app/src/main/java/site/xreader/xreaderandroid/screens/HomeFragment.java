@@ -1,4 +1,4 @@
-package site.xreader.xreaderandroid;
+package site.xreader.xreaderandroid.screens;
 
 import android.os.Bundle;
 
@@ -19,8 +19,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.adapters.RecentsAdapter;
 import site.xreader.xreaderandroid.models.Novel;
+import site.xreader.xreaderandroid.screens.LoginFragment;
 import site.xreader.xreaderandroid.utils.BackendProxy;
 import site.xreader.xreaderandroid.widgets.DecisionDialog;
 

@@ -1,4 +1,4 @@
-package site.xreader.xreaderandroid;
+package site.xreader.xreaderandroid.screens;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import site.xreader.xreaderandroid.R;
 
 public class SplashFragment extends Fragment {
 

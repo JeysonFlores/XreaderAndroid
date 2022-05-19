@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
-import site.xreader.xreaderandroid.utils.BackendProxy;
+import site.xreader.xreaderandroid.screens.SplashFragment;
 
 public class MainActivity extends AppCompatActivity {
 

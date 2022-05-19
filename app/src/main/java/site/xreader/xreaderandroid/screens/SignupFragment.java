@@ -1,4 +1,4 @@
-package site.xreader.xreaderandroid;
+package site.xreader.xreaderandroid.screens;
 
 import android.os.Bundle;
 
@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import site.xreader.xreaderandroid.R;
+import site.xreader.xreaderandroid.screens.LoginFragment;
 import site.xreader.xreaderandroid.utils.BackendProxy;
 import site.xreader.xreaderandroid.widgets.StatusDialog;
 
