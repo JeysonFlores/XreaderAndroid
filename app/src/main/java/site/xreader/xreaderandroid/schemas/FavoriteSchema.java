@@ -11,9 +11,7 @@ public class FavoriteSchema implements BaseColumns {
             "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                     _ID + " INTEGER PRIMARY KEY," +
                     COLUMN_NAME_USERID + " INTEGER," +
-                    COLUMN_NAME_NOVELID + " INTEGER," +
-                    "FOREIGN KEY(" + COLUMN_NAME_USERID + ") REFERENCES (" + UserSchema.COLUMN_NAME_USERNAME +")"
-            + ")";
+                    COLUMN_NAME_NOVELID + " INTEGER)";
 
     public static final String SQL_DELETE =
             "DROP TABLE IF EXISTS " + TABLE_NAME;

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.adapters.VolumesListAdapter;
 import site.xreader.xreaderandroid.models.Novel;
 import site.xreader.xreaderandroid.services.BackendProxy;
+import site.xreader.xreaderandroid.services.InternalDbHelper;
 import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 
@@ -32,6 +34,7 @@ public class NovelDescriptionFragment extends Fragment {
     private Fragment previousScreen;
     private Novel novel;
     private Button goBackBtn;
+    private ImageButton favoriteBtn;
     private TextView titleLbl;
     private TextView subtitleLbl;
     private ImageView novelImg;
@@ -39,11 +42,15 @@ public class NovelDescriptionFragment extends Fragment {
     private RecyclerView volumeRv;
     private LinearLayoutManager linearMng;
     private VolumesListAdapter adapter;
+    private InternalDbHelper internalStorage;
+    private String loggedUser;
+    private boolean isFavorite;
 
-    public NovelDescriptionFragment(Fragment previousScreen, BackendProxy backend, Novel novel) {
+    public NovelDescriptionFragment(Fragment previousScreen, BackendProxy backend, Novel novel, String loggedUser) {
         this.backend = backend;
         this.previousScreen = previousScreen;
         this.novel = novel;
+        this.loggedUser = loggedUser;
     }
 
 
@@ -57,6 +64,7 @@ public class NovelDescriptionFragment extends Fragment {
 
         // Setting up the UI elements
         goBackBtn = (Button) mainView.findViewById(R.id.novelDescriptionGoBackBtn);
+        favoriteBtn = (ImageButton) mainView.findViewById(R.id.novelDescriptionFavoriteBtn);
         titleLbl = (TextView) mainView.findViewById(R.id.novelDescriptionTitleLbl);
         subtitleLbl = (TextView) mainView.findViewById(R.id.novelDescriptionSubtitleLbl);
         novelImg = (ImageView) mainView.findViewById(R.id.novelDescriptionNovelImg);
@@ -70,7 +78,18 @@ public class NovelDescriptionFragment extends Fragment {
         novelImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         descriptionLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
+        // I
+        internalStorage = new InternalDbHelper(getContext());
+
         // Setting up UI elements' data
+        isFavorite = internalStorage.isFavorite(loggedUser, novel.id);
+
+        if(isFavorite) {
+            favoriteBtn.setImageResource(R.drawable.heart_full_icon);
+        } else {
+            favoriteBtn.setImageResource(R.drawable.heart_icon);
+        }
+
         titleLbl.setText(novel.name);
         subtitleLbl.setText(novel.author + " (" + novel.publishing_year + ")");
         Glide
@@ -86,6 +105,18 @@ public class NovelDescriptionFragment extends Fragment {
             // Screen change to previousScreen (Home, NovelList)
             FragmentManager fm = getActivity().getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();
+        });
+
+        favoriteBtn.setOnClickListener((v) -> {
+            if(isFavorite) {
+                favoriteBtn.setImageResource(R.drawable.heart_icon);
+                internalStorage.deleteFavoriteFromUser(novel.id, loggedUser);
+                isFavorite = false;
+            } else {
+                favoriteBtn.setImageResource(R.drawable.heart_full_icon);
+                internalStorage.insertFavoriteIntoUser(novel.id, loggedUser);
+                isFavorite = true;
+            }
         });
 
         // API getAllVolumes request

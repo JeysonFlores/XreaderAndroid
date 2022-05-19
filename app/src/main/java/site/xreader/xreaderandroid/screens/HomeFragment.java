@@ -15,30 +15,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.adapters.RecentsAdapter;
 import site.xreader.xreaderandroid.models.Novel;
+import site.xreader.xreaderandroid.models.User;
 import site.xreader.xreaderandroid.services.BackendProxy;
+import site.xreader.xreaderandroid.services.InternalDbHelper;
 import site.xreader.xreaderandroid.widgets.DecisionDialog;
 import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 public class HomeFragment extends Fragment {
 
-    private Flow recentFlow;
-    private BackendProxy backend;
-    private CardView prueba;
-    private ViewPager recentViewPage;
-    private ArrayList<Novel> recentNovels;
     private Button logoutBtn;
     private RecyclerView recentRv;
     private LinearLayoutManager linearMng;
     private RecentsAdapter adapter;
+    private BackendProxy backend;
+    private User loggedUser;
 
     public HomeFragment(BackendProxy backend) {
         this.backend = backend;
+    }
+
+    public HomeFragment(BackendProxy backend, User loggedUser) {
+        this.backend = backend;
+        this.loggedUser = loggedUser;
     }
 
     @Override
@@ -69,7 +74,8 @@ public class HomeFragment extends Fragment {
             adapter = new RecentsAdapter(getContext(), novels);
             adapter.setElementClickListener((novel) -> {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.beginTransaction().replace(R.id.scenario, new NovelDescriptionFragment(this, backend, novel)).commit();
+                fm.beginTransaction().replace(R.id.scenario, new NovelDescriptionFragment(this,
+                        backend, novel, loggedUser.getUsername())).commit();
             });
 
             recentRv.setAdapter(adapter);
@@ -81,6 +87,8 @@ public class HomeFragment extends Fragment {
                         fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
                     }).show();
         });
+
+        Toast.makeText(getContext(), "Favoritos: " + loggedUser.getFavorites().size(), Toast.LENGTH_SHORT).show();
 
         return mainView;
     }

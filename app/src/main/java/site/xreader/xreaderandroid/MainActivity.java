@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
+import site.xreader.xreaderandroid.screens.LoginFragment;
 import site.xreader.xreaderandroid.screens.SplashFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.scenario, new SplashFragment()).commit();
+        fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
         //fm.beginTransaction().replace(R.id.scenario, new HomeFragment(new BackendProxy())).commit();
     }
 }

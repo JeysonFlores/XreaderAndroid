@@ -15,8 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.studioidan.httpagent.U;
+
 import site.xreader.xreaderandroid.R;
+import site.xreader.xreaderandroid.models.User;
 import site.xreader.xreaderandroid.services.BackendProxy;
+import site.xreader.xreaderandroid.services.InternalDbHelper;
 import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 public class LoginFragment extends Fragment {
@@ -30,6 +34,7 @@ public class LoginFragment extends Fragment {
     private Button loginBtn;
     private Button signupBtn;
     private BackendProxy backend;
+    private InternalDbHelper internalStorage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +67,9 @@ public class LoginFragment extends Fragment {
         // API connection proxy initializing
         backend = new BackendProxy();
 
+        // Internal database initialization
+        internalStorage = new InternalDbHelper(getContext());
+
         // Events handling
         loginBtn.setOnClickListener((v) -> {
             String username = usernameTxt.getText().toString();
@@ -74,8 +82,17 @@ public class LoginFragment extends Fragment {
                 // API login request
                 backend.login(username, password, () -> {
                     // On success: Screen change to Home
+                    User loggedUser = null;
+
+                    if(internalStorage.userExists(username)) {
+                        loggedUser = new User(username, internalStorage.getFavoritesFromUser(username));
+                    } else {
+                        internalStorage.insertUser(username);
+                        loggedUser = new User(username);
+                    }
+
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.beginTransaction().replace(R.id.scenario, new HomeFragment(backend)).commit();
+                    fm.beginTransaction().replace(R.id.scenario, new HomeFragment(backend, loggedUser)).commit();
                 }, (error) -> {
                     // On error: display error
                     String errMsg;
