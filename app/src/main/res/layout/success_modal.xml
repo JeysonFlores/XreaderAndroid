@@ -50,8 +50,9 @@
         android:layout_marginStart="104dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/button_success_rounded"
-        android:fontFamily="@font/inter_regular"
+        android:fontFamily="@font/inter_semibold"
         android:text="Aceptar"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

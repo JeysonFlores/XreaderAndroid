@@ -12,7 +12,7 @@ import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.callbacks.SimpleCallback;
 
 public class StatusDialog {
-    public static Dialog createErrorDialog(Context context, String message) {
+    public static Dialog createError(Context context, String message) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.error_modal);
 
@@ -34,8 +34,9 @@ public class StatusDialog {
         return dialog;
     }
 
-    public static Dialog createErrorDialog(Context context, String message, SimpleCallback cb) {
+    public static Dialog createError(Context context, String message, SimpleCallback cb) {
         Dialog dialog = new Dialog(context);
+        dialog.setCancelable(false);
         dialog.setContentView(R.layout.error_modal);
 
         ImageView errorImg = (ImageView) dialog.findViewById(R.id.errorModalImg);
@@ -59,7 +60,7 @@ public class StatusDialog {
         return dialog;
     }
 
-    public static Dialog createSuccessDialog(Context context, String message) {
+    public static Dialog createSuccess(Context context, String message) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.success_modal);
 
@@ -81,8 +82,9 @@ public class StatusDialog {
         return dialog;
     }
 
-    public static Dialog createSuccessDialog(Context context, String message, SimpleCallback cb) {
+    public static Dialog createSuccess(Context context, String message, SimpleCallback cb) {
         Dialog dialog = new Dialog(context);
+        dialog.setCancelable(false);
         dialog.setContentView(R.layout.success_modal);
 
         ImageView errorImg = (ImageView) dialog.findViewById(R.id.successModalImg);

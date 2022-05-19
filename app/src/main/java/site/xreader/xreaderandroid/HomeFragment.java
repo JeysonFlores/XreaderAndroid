@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.helper.widget.Flow;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -13,6 +14,7 @@ import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import site.xreader.xreaderandroid.adapters.RecentsAdapter;
 import site.xreader.xreaderandroid.models.Novel;
 import site.xreader.xreaderandroid.utils.BackendProxy;
+import site.xreader.xreaderandroid.widgets.DecisionDialog;
 
 public class HomeFragment extends Fragment {
 
@@ -28,6 +31,7 @@ public class HomeFragment extends Fragment {
     private CardView prueba;
     private ViewPager recentViewPage;
     private ArrayList<Novel> recentNovels;
+    private Button logoutBtn;
     private RecyclerView recentRv;
     private LinearLayoutManager linearMng;
     private RecentsAdapter adapter;
@@ -42,6 +46,20 @@ public class HomeFragment extends Fragment {
         View mainView = inflater.inflate(R.layout.fragment_home,container,false);
         TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
         setEnterTransition(transitionInflater.inflateTransition(R.transition.fade));
+
+        logoutBtn = (Button) mainView.findViewById(R.id.homeLogoutBtn);
+        logoutBtn.setOnClickListener((v) -> {
+            logoutBtn.setEnabled(false);
+
+            DecisionDialog.create(getContext(), "Cerrar Sesión", "Está " +
+                    "a punto de cerrar sesión. ¿Está seguro que quiere continuar?",
+                    () -> {
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
+                    }, () -> {
+                        logoutBtn.setEnabled(true);
+            }).show();
+        });
 
         ArrayList<Novel> data = new ArrayList<>();
         String URL = "https://kbimages1-a.akamaihd.net/3e366a18-3d05-4898-a371-ab8cca70eb00/1200/1200/False/overlord-vol-8-light-novel.jpg";

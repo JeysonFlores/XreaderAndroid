@@ -76,7 +76,7 @@ public class SignupFragment extends Fragment {
                 signupBtn.setEnabled(false);
 
                 backend.signup(username, user, password, () -> {
-                    StatusDialog.createSuccessDialog(getContext(), "Cuenta creada!",
+                    StatusDialog.createSuccess(getContext(), "Cuenta creada!",
                             () -> {
                                 FragmentManager fm = getActivity().getSupportFragmentManager();
                                 fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
@@ -97,7 +97,7 @@ public class SignupFragment extends Fragment {
                     }
 
                     signupBtn.setEnabled(true);
-                    StatusDialog.createErrorDialog(getContext(), errorMsg).show();
+                    StatusDialog.createError(getContext(), errorMsg).show();
                 });
             } else {
                 Toast.makeText(getContext(), "Los campos no están completos. Verifíquelos.", Toast.LENGTH_SHORT).show();

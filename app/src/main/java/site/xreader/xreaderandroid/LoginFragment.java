@@ -80,10 +80,10 @@ public class LoginFragment extends Fragment {
                     }
 
                     loginBtn.setEnabled(true);
-                    StatusDialog.createErrorDialog(getContext(), errMsg).show();
+                    StatusDialog.createError(getContext(), errMsg).show();
                 });
             } else {
-                StatusDialog.createErrorDialog(getContext(), "Ingrese datos válidos por favor.").show();
+                StatusDialog.createError(getContext(), "Ingrese datos válidos por favor.").show();
             }
         });
 
