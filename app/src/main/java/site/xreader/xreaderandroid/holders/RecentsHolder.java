@@ -1,4 +1,4 @@
-package site.xreader.xreaderandroid.adapters;
+package site.xreader.xreaderandroid.holders;
 
 import android.content.Context;
 import android.view.View;
