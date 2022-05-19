@@ -109,7 +109,6 @@ public class NovelDescriptionFragment extends Fragment {
             }).show();
         });
 
-
         return mainView;
     }
 }
