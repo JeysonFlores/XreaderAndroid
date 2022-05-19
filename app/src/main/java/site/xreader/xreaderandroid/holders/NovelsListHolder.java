@@ -20,7 +20,6 @@ import site.xreader.xreaderandroid.models.Volume;
 public class NovelsListHolder extends RecyclerView.ViewHolder {
 
     private Volume data;
-    private Context context;
     private ImageView volumeImg;
     private TextView nameLbl;
     private ImageButton startReadingBtn;

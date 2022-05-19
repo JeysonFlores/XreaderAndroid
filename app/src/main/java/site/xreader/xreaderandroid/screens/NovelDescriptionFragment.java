@@ -11,6 +11,7 @@ import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -60,10 +61,11 @@ public class NovelDescriptionFragment extends Fragment {
         descriptionLbl = (TextView) mainView.findViewById(R.id.novelDescriptionDescriptionLbl);
         volumeRv = (RecyclerView) mainView.findViewById(R.id.novelDescriptionVolumesView);
 
-        goBackBtn.setOnClickListener((v) -> {
-            FragmentManager fm = getActivity().getSupportFragmentManager();
-            fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();
-        } );
+        goBackBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        titleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        subtitleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        novelImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        descriptionLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
         titleLbl.setText(novel.name);
         subtitleLbl.setText(novel.author + " (" + novel.publishing_year + ")");
@@ -74,6 +76,11 @@ public class NovelDescriptionFragment extends Fragment {
             .into(novelImg);
         novelImg.setClipToOutline(true);
         descriptionLbl.setText(novel.description);
+
+        goBackBtn.setOnClickListener((v) -> {
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();
+        });
 
         backend.getAllVolumesFromNovel(novel.id, (volumes) -> {
             linearMng = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

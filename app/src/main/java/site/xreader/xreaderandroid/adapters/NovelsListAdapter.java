@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -41,6 +42,8 @@ public class NovelsListAdapter extends RecyclerView.Adapter<NovelsListHolder> {
 
         ConstraintLayout mainView = (ConstraintLayout) item.findViewById(R.id.novelItemView);
         mainView.setClipToOutline(true);
+
+        item.startAnimation(AnimationUtils.loadAnimation(context, R.anim.lefttoright));
 
         return new NovelsListHolder(item, elementClickListener);
     }
