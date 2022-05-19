@@ -35,6 +35,7 @@ public class HomeFragment extends Fragment {
     private LinearLayoutManager linearMng;
     private RecentsAdapter adapter;
     private BackendProxy backend;
+    private InternalDbHelper internalStorage;
     private User loggedUser;
 
     public HomeFragment(BackendProxy backend) {
@@ -52,6 +53,9 @@ public class HomeFragment extends Fragment {
         View mainView = inflater.inflate(R.layout.fragment_home,container,false);
         TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
         setEnterTransition(transitionInflater.inflateTransition(R.transition.fade));
+
+        internalStorage = new InternalDbHelper(getContext());
+        loggedUser.updateFavorites(internalStorage);
 
         logoutBtn = (Button) mainView.findViewById(R.id.homeLogoutBtn);
         logoutBtn.setOnClickListener((v) -> {

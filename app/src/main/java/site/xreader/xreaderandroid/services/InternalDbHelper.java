@@ -42,17 +42,18 @@ public class InternalDbHelper extends SQLiteOpenHelper {
         String[] selectionArgs = { username };
 
         Cursor cursor = db.query(
-                UserSchema.TABLE_NAME,   // The table to query
-                null,             // The array of columns to return (pass null to get all)
-                selection,              // The columns for the WHERE clause
-                selectionArgs,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                null               // The sort order
+                UserSchema.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
         );
 
         return cursor.getCount() > 0;
     }
+
     public Long insertUser(String username) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -70,13 +71,13 @@ public class InternalDbHelper extends SQLiteOpenHelper {
         String[] selectionArgs = { username, String.valueOf(novelId) };
 
         Cursor cursor = db.query(
-                FavoriteSchema.TABLE_NAME,   // The table to query
-                null,             // The array of columns to return (pass null to get all)
-                selection,              // The columns for the WHERE clause
-                selectionArgs,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                null               // The sort order
+                FavoriteSchema.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
         );
 
         return cursor.getCount() > 0;
@@ -89,13 +90,13 @@ public class InternalDbHelper extends SQLiteOpenHelper {
         String[] selectionArgs = { username };
 
         Cursor cursor = db.query(
-                FavoriteSchema.TABLE_NAME,   // The table to query
-                null,             // The array of columns to return (pass null to get all)
-                selection,              // The columns for the WHERE clause
-                selectionArgs,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                null               // The sort order
+                FavoriteSchema.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
         );
 
         ArrayList<Integer> favorites = new ArrayList<>();
@@ -121,8 +122,9 @@ public class InternalDbHelper extends SQLiteOpenHelper {
     public int deleteFavoriteFromUser(int novelId, String username) {
         SQLiteDatabase db = getWritableDatabase();
 
-        String selection = FavoriteSchema.COLUMN_NAME_NOVELID + " = ?";
-        String[] selectionArgs = { "MyTitle" };
+        String selection = FavoriteSchema.COLUMN_NAME_USERID + " = ? AND ";
+        selection += FavoriteSchema.COLUMN_NAME_NOVELID + " = ?";
+        String[] selectionArgs = { username, String.valueOf(novelId) };
 
         return db.delete(FavoriteSchema.TABLE_NAME, selection, selectionArgs);
     }
