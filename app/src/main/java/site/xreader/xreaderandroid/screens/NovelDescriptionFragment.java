@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
@@ -12,14 +14,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
 import site.xreader.xreaderandroid.R;
+import site.xreader.xreaderandroid.adapters.NovelsListAdapter;
 import site.xreader.xreaderandroid.models.Novel;
-import site.xreader.xreaderandroid.utils.BackendProxy;
+import site.xreader.xreaderandroid.services.BackendProxy;
+import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 
 public class NovelDescriptionFragment extends Fragment {
@@ -32,6 +35,9 @@ public class NovelDescriptionFragment extends Fragment {
     private TextView subtitleLbl;
     private ImageView novelImg;
     private TextView descriptionLbl;
+    private RecyclerView volumeRv;
+    private LinearLayoutManager linearMng;
+    private NovelsListAdapter adapter;
 
     public NovelDescriptionFragment(Fragment previousScreen, BackendProxy backend, Novel novel) {
         this.backend = backend;
@@ -52,6 +58,12 @@ public class NovelDescriptionFragment extends Fragment {
         subtitleLbl = (TextView) mainView.findViewById(R.id.novelDescriptionSubtitleLbl);
         novelImg = (ImageView) mainView.findViewById(R.id.novelDescriptionNovelImg);
         descriptionLbl = (TextView) mainView.findViewById(R.id.novelDescriptionDescriptionLbl);
+        volumeRv = (RecyclerView) mainView.findViewById(R.id.novelDescriptionVolumesView);
+
+        goBackBtn.setOnClickListener((v) -> {
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();
+        } );
 
         titleLbl.setText(novel.name);
         subtitleLbl.setText(novel.author + " (" + novel.publishing_year + ")");
@@ -60,12 +72,27 @@ public class NovelDescriptionFragment extends Fragment {
             .load(novel.image_path)
             .centerCrop()
             .into(novelImg);
+        novelImg.setClipToOutline(true);
         descriptionLbl.setText(novel.description);
 
-        goBackBtn.setOnClickListener((v) -> {
-            FragmentManager fm = getActivity().getSupportFragmentManager();
-            fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();
-        } );
+        backend.getAllVolumesFromNovel(novel.id, (volumes) -> {
+            linearMng = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
+            adapter = new NovelsListAdapter(getContext(), volumes);
+            adapter.setElementClickListener((volume) -> {
+                Toast.makeText(getContext(), "PDF Link: " + volume.link, Toast.LENGTH_SHORT).show();
+            });
+
+            volumeRv.setAdapter(adapter);
+            volumeRv.setLayoutManager(linearMng);
+        }, (error) -> {
+            StatusDialog.createError(getContext(), "Error al consultar los detalles de " +
+                    "la novela", () -> {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();
+            }).show();
+        });
+
 
         return mainView;
     }

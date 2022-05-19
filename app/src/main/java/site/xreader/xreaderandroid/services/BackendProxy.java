@@ -1,4 +1,4 @@
-package site.xreader.xreaderandroid.utils;
+package site.xreader.xreaderandroid.services;
 
 import android.content.Context;
 
@@ -10,12 +10,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import site.xreader.xreaderandroid.callbacks.ErrorCallback;
 import site.xreader.xreaderandroid.callbacks.ListNovelCallback;
+import site.xreader.xreaderandroid.callbacks.ListVolumesCallback;
 import site.xreader.xreaderandroid.callbacks.SimpleCallback;
 import site.xreader.xreaderandroid.models.Novel;
+import site.xreader.xreaderandroid.models.Volume;
+import site.xreader.xreaderandroid.utils.RequestParams;
+import site.xreader.xreaderandroid.utils.UrlBuilder;
 
 public class BackendProxy {
 
@@ -138,6 +143,47 @@ public class BackendProxy {
                             }
                         } catch (Exception e) {
                             ecb.call(e.toString());
+                        }
+                    }
+                });
+    }
+
+    public void getAllVolumesFromNovel(int novel_id, ListVolumesCallback cb, ErrorCallback ecb) {
+        RequestParams params = new RequestParams();
+        params.setParam("token", getToken());
+
+        String URL = UrlBuilder.build(API_URL + "/novels/" + novel_id + "/volumes", params);
+
+        HttpAgent.get(URL)
+                .goJson(new JsonCallback() {
+                    @Override
+                    protected void onDone(boolean success, JSONObject jsonResults) {
+                        try {
+                            if(success) {
+                                if(!jsonResults.isNull("volumes")) {
+                                    ArrayList<Volume> responseVolumes = new ArrayList<>();
+                                    JSONArray responseArray = jsonResults.getJSONArray("volumes");
+
+                                    for(int i = 0; i < responseArray.length(); i++) {
+                                        JSONObject element = responseArray.getJSONObject(i);
+
+                                        int id = element.getInt("id");
+                                        String name = element.getString("name");
+                                        String image_path = element.getString("image_path");
+                                        String link = element.getString("link");
+
+                                        responseVolumes.add(new Volume(id, name, link, image_path));
+                                    }
+
+                                    cb.call(responseVolumes);
+                                } else {
+                                    ecb.call("NotFoundError");
+                                }
+                            } else {
+                                ecb.call("RequestError");
+                            }
+                        } catch (Exception e) {
+                            ecb.call("ResponseError");
                         }
                     }
                 });

@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import site.xreader.xreaderandroid.R;
-import site.xreader.xreaderandroid.utils.BackendProxy;
+import site.xreader.xreaderandroid.services.BackendProxy;
 import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 public class LoginFragment extends Fragment {

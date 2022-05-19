@@ -1,11 +1,9 @@
 package site.xreader.xreaderandroid;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.studioidan.httpagent.HttpAgent;
-import com.studioidan.httpagent.JsonCallback;
-import com.studioidan.httpagent.StringCallback;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import site.xreader.xreaderandroid.utils.BackendProxy;
-import site.xreader.xreaderandroid.utils.RequestParams;
-import site.xreader.xreaderandroid.utils.UrlBuilder;
+import site.xreader.xreaderandroid.services.BackendProxy;
 
 public class SessionFragment extends Fragment {
     EditText cajaUser, cajacontra;

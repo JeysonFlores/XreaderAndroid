@@ -21,8 +21,9 @@ import java.util.ArrayList;
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.adapters.RecentsAdapter;
 import site.xreader.xreaderandroid.models.Novel;
-import site.xreader.xreaderandroid.utils.BackendProxy;
+import site.xreader.xreaderandroid.services.BackendProxy;
 import site.xreader.xreaderandroid.widgets.DecisionDialog;
+import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 public class HomeFragment extends Fragment {
 
@@ -75,9 +76,13 @@ public class HomeFragment extends Fragment {
             recentRv.setAdapter(adapter);
             recentRv.setLayoutManager(linearMng);
         }, (error) -> {
-
+            StatusDialog.createError(getContext(), "Hubo un error de conexión, inténtalo más tarde",
+                    () -> {
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
+                    }).show();
         });
-        
+
         return mainView;
     }
 }

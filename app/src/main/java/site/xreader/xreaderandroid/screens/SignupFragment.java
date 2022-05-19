@@ -18,8 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import site.xreader.xreaderandroid.R;
-import site.xreader.xreaderandroid.screens.LoginFragment;
-import site.xreader.xreaderandroid.utils.BackendProxy;
+import site.xreader.xreaderandroid.services.BackendProxy;
 import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 public class SignupFragment extends Fragment {
