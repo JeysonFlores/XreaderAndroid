@@ -13,26 +13,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.callbacks.NovelCallback;
 import site.xreader.xreaderandroid.models.Novel;
+import site.xreader.xreaderandroid.services.BackendProxy;
 
-public class RecentsHolder extends RecyclerView.ViewHolder {
+public class VerticalNovelCardHolder extends RecyclerView.ViewHolder {
 
     private Novel data;
     private ImageView novelImg;
-    private TextView novelLbl;
-    private CardView novelCard;
+    private TextView titleLbl;
+    private TextView subtitleLbl;
+    private CardView favoriteCard;
 
-    public RecentsHolder(@NonNull @NotNull View itemView, NovelCallback onClickListener) {
+    public VerticalNovelCardHolder(@NonNull @NotNull View itemView, NovelCallback onClickListener) {
         super(itemView);
-        novelImg = (ImageView) itemView.findViewById(R.id.novelCardImg);
-        novelLbl = (TextView) itemView.findViewById(R.id.novelCardLbl);
-        novelCard = (CardView) itemView.findViewById(R.id.novelCard);
+        novelImg = (ImageView) itemView.findViewById(R.id.favoriteItemImg);
+        titleLbl = (TextView) itemView.findViewById(R.id.favoriteItemTitleLbl);
+        subtitleLbl = (TextView) itemView.findViewById(R.id.favoriteItemSubtitleLbl);
+        favoriteCard = (CardView) itemView.findViewById(R.id.favoriteItemCard);
 
-        novelCard.setOnClickListener(view -> onClickListener.call(data));
+        favoriteCard.setOnClickListener(view -> onClickListener.call(data));
     }
 
     public void setData(Novel data, Context context) {
@@ -41,7 +43,8 @@ public class RecentsHolder extends RecyclerView.ViewHolder {
     }
 
     private void updateWidgets(Context context) {
-        novelLbl.setText(data.name);
+        titleLbl.setText(data.name);
+        subtitleLbl.setText(data.author + "(" + data.publishing_year + ")");
 
         Glide
             .with(context)

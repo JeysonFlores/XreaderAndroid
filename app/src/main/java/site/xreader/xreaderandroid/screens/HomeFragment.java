@@ -17,19 +17,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import site.xreader.xreaderandroid.R;
-import site.xreader.xreaderandroid.adapters.FavoritesAdapter;
-import site.xreader.xreaderandroid.adapters.RecentsAdapter;
+import site.xreader.xreaderandroid.adapters.VerticalNovelCardAdapter;
+import site.xreader.xreaderandroid.adapters.HorizontalNovelAdapter;
 import site.xreader.xreaderandroid.models.Novel;
 import site.xreader.xreaderandroid.models.User;
 import site.xreader.xreaderandroid.services.BackendProxy;
 import site.xreader.xreaderandroid.services.InternalDbHelper;
 import site.xreader.xreaderandroid.widgets.DecisionDialog;
-import site.xreader.xreaderandroid.widgets.NovelCard;
 import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 public class HomeFragment extends Fragment {
@@ -45,9 +43,9 @@ public class HomeFragment extends Fragment {
     private TextView favCountLbl;
     private RecyclerView favoritesRv;
     private LinearLayoutManager favMng;
-    private FavoritesAdapter favAdapter;
+    private VerticalNovelCardAdapter favAdapter;
     private LinearLayoutManager linearMng;
-    private RecentsAdapter recentAdapter;
+    private HorizontalNovelAdapter recentAdapter;
     private BackendProxy backend;
     private InternalDbHelper internalStorage;
     private User loggedUser;
@@ -134,7 +132,7 @@ public class HomeFragment extends Fragment {
             // On success: fills the Recent Recycler View with the data
             linearMng = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
-            recentAdapter = new RecentsAdapter(getContext(), novels);
+            recentAdapter = new HorizontalNovelAdapter(getContext(), novels);
             recentAdapter.setElementClickListener((novel) -> {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.beginTransaction().replace(R.id.scenario, new NovelDescriptionFragment(this,
@@ -159,7 +157,7 @@ public class HomeFragment extends Fragment {
             favCountLbl.setText("(" + favNovelList.size() + " elementos)");
 
             favMng = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-            favAdapter = new FavoritesAdapter(getContext(), favNovelList);
+            favAdapter = new VerticalNovelCardAdapter(getContext(), favNovelList);
             favAdapter.setElementClickListener((novel) -> {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.beginTransaction().replace(R.id.scenario, new NovelDescriptionFragment(this,

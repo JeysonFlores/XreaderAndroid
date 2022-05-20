@@ -15,17 +15,16 @@ import java.util.ArrayList;
 
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.callbacks.NovelCallback;
-import site.xreader.xreaderandroid.holders.FavoritesHolder;
+import site.xreader.xreaderandroid.holders.VerticalNovelCardHolder;
 import site.xreader.xreaderandroid.models.Novel;
-import site.xreader.xreaderandroid.services.BackendProxy;
 
-public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesHolder> {
+public class VerticalNovelCardAdapter extends RecyclerView.Adapter<VerticalNovelCardHolder> {
 
     private Context context;
     private ArrayList<Novel> data;
     private NovelCallback elementClickListener;
 
-    public FavoritesAdapter(Context context, ArrayList<Novel> data) {
+    public VerticalNovelCardAdapter(Context context, ArrayList<Novel> data) {
         this.context = context;
         this.data = data;
     }
@@ -37,17 +36,17 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesHolder> {
     @NonNull
     @NotNull
     @Override
-    public FavoritesHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public VerticalNovelCardHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View card = LayoutInflater.from(context).inflate(R.layout.favorite_item, parent, false);
 
         CardView mainView = (CardView) card.findViewById(R.id.favoriteItemCard);
         mainView.setCardBackgroundColor(card.getResources().getColor(R.color.gray_util));
 
-        return new FavoritesHolder(card, elementClickListener);
+        return new VerticalNovelCardHolder(card, elementClickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull FavoritesHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull VerticalNovelCardHolder holder, int position) {
         holder.setData(data.get(position), context);
     }
 

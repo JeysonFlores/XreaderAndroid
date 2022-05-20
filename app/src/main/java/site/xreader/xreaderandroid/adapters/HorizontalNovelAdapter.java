@@ -15,16 +15,16 @@ import java.util.ArrayList;
 
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.callbacks.NovelCallback;
-import site.xreader.xreaderandroid.holders.RecentsHolder;
+import site.xreader.xreaderandroid.holders.HorizontalNovelCardHolder;
 import site.xreader.xreaderandroid.models.Novel;
 
-public class RecentsAdapter extends RecyclerView.Adapter<RecentsHolder> {
+public class HorizontalNovelAdapter extends RecyclerView.Adapter<HorizontalNovelCardHolder> {
 
     private Context context;
     private ArrayList<Novel> data;
     private NovelCallback elementClickListener;
 
-    public RecentsAdapter(Context context, ArrayList<Novel> data) {
+    public HorizontalNovelAdapter(Context context, ArrayList<Novel> data) {
         this.context = context;
         this.data = data;
     }
@@ -36,17 +36,17 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsHolder> {
     @NonNull
     @NotNull
     @Override
-    public RecentsHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public HorizontalNovelCardHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View card = LayoutInflater.from(context).inflate(R.layout.novel_card, parent, false);
 
         CardView mainView = (CardView) card.findViewById(R.id.novelCard);
         mainView.setCardBackgroundColor(card.getResources().getColor(R.color.gray_util));
 
-        return new RecentsHolder(card, elementClickListener);
+        return new HorizontalNovelCardHolder(card, elementClickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull RecentsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull HorizontalNovelCardHolder holder, int position) {
         holder.setData(data.get(position), context);
     }
 

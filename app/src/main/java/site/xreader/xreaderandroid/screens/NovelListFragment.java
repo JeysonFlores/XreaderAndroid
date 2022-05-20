@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import site.xreader.xreaderandroid.R;
-import site.xreader.xreaderandroid.adapters.FavoritesAdapter;
+import site.xreader.xreaderandroid.adapters.VerticalNovelCardAdapter;
 import site.xreader.xreaderandroid.services.BackendProxy;
 import site.xreader.xreaderandroid.widgets.StatusDialog;
 
@@ -29,7 +29,7 @@ public class NovelListFragment extends Fragment {
     private TextView searchDescriptionLbl;
     private RecyclerView queryRv;
     private LinearLayoutManager queryMng;
-    private FavoritesAdapter queryAdapter;
+    private VerticalNovelCardAdapter queryAdapter;
     private Fragment previousScreen;
     private BackendProxy backend;
     private String loggedUser;
@@ -90,7 +90,7 @@ public class NovelListFragment extends Fragment {
 
         backend.searchNovels(query, (novels) -> {
             queryMng = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-            queryAdapter = new FavoritesAdapter(getContext(), novels);
+            queryAdapter = new VerticalNovelCardAdapter(getContext(), novels);
             queryAdapter.setElementClickListener((novel) -> {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.beginTransaction().replace(R.id.scenario, new NovelDescriptionFragment(this,
