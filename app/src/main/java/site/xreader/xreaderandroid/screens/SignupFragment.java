@@ -78,9 +78,22 @@ public class SignupFragment extends Fragment {
             String user = userTxt.getText().toString();
             String username = usernameTxt.getText().toString();
             String password = passwordTxt.getText().toString();
+            boolean validated = true;
+
+            if(user.replace(" ", "").contentEquals("")){
+                validated = false;
+            }
+
+            if(username.replace(" ", "").contentEquals("")){
+                validated = false;
+            }
+
+            if(password.replace(" ", "").contentEquals("")){
+                validated = false;
+            }
 
             // Validating form data
-            if(validateText(user, username, password)) {
+            if(validated) {
                 signupBtn.setEnabled(false);
 
                 // API signup request
@@ -111,7 +124,7 @@ public class SignupFragment extends Fragment {
                     StatusDialog.createError(getContext(), errorMsg).show();
                 });
             } else {
-                Toast.makeText(getContext(), "Los campos no están completos. Verifíquelos.", Toast.LENGTH_SHORT).show();
+                StatusDialog.createError(getContext(), getString(R.string.validation_error)).show();
             }
         });
 

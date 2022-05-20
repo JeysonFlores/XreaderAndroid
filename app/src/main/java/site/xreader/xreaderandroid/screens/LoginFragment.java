@@ -74,9 +74,18 @@ public class LoginFragment extends Fragment {
         loginBtn.setOnClickListener((v) -> {
             String username = usernameTxt.getText().toString();
             String password = passwordTxt.getText().toString();
+            boolean validated = true;
+
+            if(username.replace(" ", "").contentEquals("")){
+                validated = false;
+            }
+
+            if(password.replace(" ", "").contentEquals("")){
+                validated = false;
+            }
 
             // Validating form data
-            if(validateText(username, password)) {
+            if(validated) {
                 loginBtn.setEnabled(false);
 
                 // API login request
@@ -120,9 +129,5 @@ public class LoginFragment extends Fragment {
         });
 
         return mainView;
-    }
-
-    private boolean validateText(String username, String password) {
-        return !(username.replace(" ", "") == "" || password.replace(" ", "") == "");
     }
 }

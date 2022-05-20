@@ -50,6 +50,11 @@ public class HomeFragment extends Fragment {
     private InternalDbHelper internalStorage;
     private User loggedUser;
 
+    public HomeFragment(BackendProxy backend, String username) {
+        this.backend = backend;
+        this.loggedUser = new User(username);
+    }
+
     public HomeFragment(BackendProxy backend, User loggedUser) {
         this.backend = backend;
         this.loggedUser = loggedUser;
