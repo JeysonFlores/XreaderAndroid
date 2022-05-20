@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import site.xreader.xreaderandroid.callbacks.ErrorCallback;
 import site.xreader.xreaderandroid.callbacks.ListNovelCallback;
 import site.xreader.xreaderandroid.callbacks.ListVolumesCallback;
+import site.xreader.xreaderandroid.callbacks.NovelCallback;
 import site.xreader.xreaderandroid.callbacks.SimpleCallback;
 import site.xreader.xreaderandroid.models.Novel;
 import site.xreader.xreaderandroid.models.Volume;
@@ -143,6 +144,36 @@ public class BackendProxy {
                             }
                         } catch (Exception e) {
                             ecb.call(e.toString());
+                        }
+                    }
+                });
+    }
+
+    public void getNovelById(int id, NovelCallback cb, ErrorCallback ecb) {
+        RequestParams params = new RequestParams();
+        params.setParam("token", getToken());
+
+        String URL = UrlBuilder.build(API_URL + "/novels/" + id , params);
+
+        HttpAgent.get(URL)
+                .goJson(new JsonCallback() {
+                    @Override
+                    protected void onDone(boolean success, JSONObject jsonResults) {
+                        try {
+                            if(success) {
+                                int id = jsonResults.getInt("id");
+                                String name = jsonResults.getString("name");
+                                String description = jsonResults.getString("description");
+                                String author = jsonResults.getString("author");
+                                String image_path = jsonResults.getString("image_path");
+                                int publishing_year = jsonResults.getInt("publishing_year");
+
+                                cb.call(new Novel(id, name, description, author, image_path, publishing_year));
+                            } else {
+                                ecb.call("RequestError");
+                            }
+                        } catch (Exception e) {
+                            ecb.call("ResponseError");
                         }
                     }
                 });

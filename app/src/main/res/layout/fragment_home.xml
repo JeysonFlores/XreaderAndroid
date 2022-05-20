@@ -20,7 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/homeHeaderDiv"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="70dp">
 
             <ImageView
                 android:id="@+id/homeTitleImg"
@@ -38,8 +38,8 @@
                 android:id="@+id/homeTitleLbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="24dp"
                 android:fontFamily="@font/inter_medium"
                 android:text="XReader"
                 android:textAlignment="viewStart"
@@ -49,17 +49,17 @@
 
             <Button
                 android:id="@+id/homeLogoutBtn"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/primary_button"
                 android:drawableLeft="@drawable/power_icon"
                 android:drawingCacheQuality="high"
-                android:fontFamily="@font/inter_bold"
+                android:fontFamily="@font/inter_semibold"
                 android:paddingStart="10dp"
-                android:text="Salir"
+                android:text="Cerrar Sesión"
                 android:textAllCaps="false"
                 android:textSize="11dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -80,16 +80,18 @@
                 android:layout_width="150dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="128dp"
+                android:paddingLeft="10dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/button_success_rounded"
                 android:text="Ver todas"
+                android:textSize="12sp"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include layout="@layout/home_favorites_div" />
-        
+
         <include layout="@layout/home_credits_div" />
 
     </LinearLayout>
