@@ -41,7 +41,6 @@
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/inter_light"
         android:gravity="center"
-        android:text="TextView"
         android:textColor="@color/gray_600"
         android:textSize="11sp"
         app:layout_constraintBottom_toTopOf="@+id/homeFavoritesView"

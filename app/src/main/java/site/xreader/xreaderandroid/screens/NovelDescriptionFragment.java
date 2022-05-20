@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import site.xreader.xreaderandroid.PdfViewerFragment;
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.adapters.VolumesListAdapter;
 import site.xreader.xreaderandroid.models.Novel;
@@ -115,6 +116,7 @@ public class NovelDescriptionFragment extends Fragment {
                 favoriteBtn.setImageResource(R.drawable.heart_full_icon);
                 internalStorage.insertFavoriteIntoUser(novel.id, loggedUser);
                 isFavorite = true;
+                Toast.makeText(getContext(), "¡Agregado a Favoritos!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -125,7 +127,8 @@ public class NovelDescriptionFragment extends Fragment {
 
             adapter = new VolumesListAdapter(getContext(), volumes);
             adapter.setElementClickListener((volume) -> {
-                Toast.makeText(getContext(), "PDF Link: " + volume.link, Toast.LENGTH_SHORT).show();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.beginTransaction().replace(R.id.scenario, new PdfViewerFragment(this, volume.link)).commit();
             });
 
             volumeRv.setAdapter(adapter);

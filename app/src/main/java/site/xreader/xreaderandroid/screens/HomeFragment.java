@@ -8,12 +8,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.transition.TransitionInflater;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -29,8 +35,14 @@ import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 public class HomeFragment extends Fragment {
 
+    private ImageView logoImg;
+    private TextView logoLbl;
     private Button logoutBtn;
+    private EditText searchTxt;
+    private TextView recentLbl;
     private RecyclerView recentRv;
+    private Button showAllBtn;
+    private TextView favLbl;
     private TextView favCountLbl;
     private RecyclerView favoritesRv;
     private LinearLayoutManager favMng;
@@ -60,10 +72,27 @@ public class HomeFragment extends Fragment {
         internalStorage = new InternalDbHelper(getContext());
         loggedUser.updateFavorites(internalStorage);
 
+        logoImg = (ImageView) mainView.findViewById(R.id.homeTitleImg);
+        logoLbl = (TextView) mainView.findViewById(R.id.homeTitleLbl);
         logoutBtn = (Button) mainView.findViewById(R.id.homeLogoutBtn);
+        searchTxt = (EditText) mainView.findViewById(R.id.homeSearchTxt);
+        recentLbl = (TextView) mainView.findViewById(R.id.homeRecentTitleLbl);
+        recentRv = (RecyclerView) mainView.findViewById(R.id.homeRecentView);
+        showAllBtn = (Button) mainView.findViewById(R.id.homeSeeAllBtn);
+        favLbl = (TextView) mainView.findViewById(R.id.homeFavoritesTitleLbl);
         favCountLbl = (TextView) mainView.findViewById(R.id.homeFavoritesCountLbl);
         favoritesRv = (RecyclerView) mainView.findViewById(R.id.homeFavoritesView);
 
+        logoImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        logoLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        logoutBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
+        searchTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
+        recentLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        recentRv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        showAllBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        favLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        favCountLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        favoritesRv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
         logoutBtn.setOnClickListener((v) -> {
             logoutBtn.setEnabled(false);
@@ -77,9 +106,21 @@ public class HomeFragment extends Fragment {
             }).show();
         });
 
-        backend.getNovels((novels) -> {
-            recentRv = (RecyclerView) mainView.findViewById(R.id.homeRecentView);
+        searchTxt.setOnKeyListener((v, keyCode, event) -> {
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                if(!searchTxt.getText().toString().replace(" ", "").isEmpty()) {
+                    Toast.makeText(getContext(), searchTxt.getText(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Campo vacío", Toast.LENGTH_SHORT).show();
+                }
 
+                return true;
+            }
+            return false;
+        });
+
+        backend.getNovels((novels) -> {
             linearMng = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
             recentAdapter = new RecentsAdapter(getContext(), novels);
@@ -112,8 +153,6 @@ public class HomeFragment extends Fragment {
                         fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
                     }).show();
         });
-
-        Toast.makeText(getContext(), "Favoritos: " + loggedUser.getFavorites().size(), Toast.LENGTH_SHORT).show();
 
         return mainView;
     }
