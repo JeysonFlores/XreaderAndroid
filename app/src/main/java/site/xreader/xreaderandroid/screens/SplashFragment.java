@@ -33,7 +33,7 @@ public class SplashFragment extends Fragment {
             // Screen change to Login
             FragmentManager fm = getActivity().getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
-        }, 3000);
+        }, 2000);
 
         return mainView;
     }

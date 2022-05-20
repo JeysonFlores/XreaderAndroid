@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_login"
+    android:background="@drawable/login_background"
+    tools:context=".screens.LoginFragment">
+
+    <TextView
+        android:id="@+id/titleLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="648dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/iniciar_sesi_n"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/descriptionLbl"
+        android:layout_width="299dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="524dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/inicia_sesion_en_tu_cuenta_para_disfrutar_de_nuestro_servicio_de_novelas"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/passwordTxt"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginBottom="236dp"
+        android:background="@drawable/textentry_rs_rounded"
+        android:ems="10"
+        android:fontFamily="@font/inter_light"
+        android:hint="@string/contrase_a"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textColor="@color/accent"
+        android:textColorHighlight="@color/accent"
+        android:textColorHint="@color/accent_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/usernameTxt"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginBottom="340dp"
+        android:background="@drawable/textentry_rs_rounded"
+        android:ems="10"
+        android:fontFamily="@font/inter_light"
+        android:hint="@string/usuario"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:textColor="@color/accent"
+        android:textColorHighlight="@color/accent"
+        android:textColorHint="@color/accent_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="124dp"
+        android:background="@drawable/primary_button"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/iniciar_sesi_n"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/signinBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/white_button"
+        android:text="@string/crear_cuenta"
+        android:textColor="@color/accent"
+        android:fontFamily="@font/inter_regular"
+        android:textColorHighlight="@color/accent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/usernameIconBack"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="134dp"
+        android:animationCache="false"
+        android:background="@drawable/entryicon_ls_rounded"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/usernameTxt"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionLbl">
+
+        <ImageView
+            android:id="@+id/usernameIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/user48"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/passwordIconBack"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="62dp"
+        android:background="@drawable/entryicon_ls_rounded"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+        app:layout_constraintEnd_toStartOf="@+id/passwordTxt">
+
+        <ImageView
+            android:id="@+id/passwordIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/secret48"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

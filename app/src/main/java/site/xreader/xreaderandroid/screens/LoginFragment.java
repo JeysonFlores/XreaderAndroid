@@ -15,8 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.studioidan.httpagent.U;
-
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.models.User;
 import site.xreader.xreaderandroid.services.BackendProxy;
@@ -29,8 +27,6 @@ public class LoginFragment extends Fragment {
     private TextView subtitleLbl;
     private EditText usernameTxt;
     private EditText passwordTxt;
-    private ConstraintLayout usernameIcon;
-    private ConstraintLayout passwordIcon;
     private Button loginBtn;
     private Button signupBtn;
     private BackendProxy backend;
@@ -45,22 +41,18 @@ public class LoginFragment extends Fragment {
         setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
         // Setting up the UI elements
-        titleLbl = (TextView) mainView.findViewById(R.id.titleLbl);
-        subtitleLbl = (TextView) mainView.findViewById(R.id.descriptionLbl);
-        usernameTxt = (EditText) mainView.findViewById(R.id.usernameTxt);
-        passwordTxt = (EditText) mainView.findViewById(R.id.passwordTxt);
-        usernameIcon = (ConstraintLayout) mainView.findViewById(R.id.usernameIconBack);
-        passwordIcon = (ConstraintLayout) mainView.findViewById(R.id.passwordIconBack);
-        loginBtn = (Button) mainView.findViewById(R.id.loginBtn);
-        signupBtn = (Button) mainView.findViewById(R.id.signinBtn);
+        titleLbl = (TextView) mainView.findViewById(R.id.loginTitleLbl);
+        subtitleLbl = (TextView) mainView.findViewById(R.id.loginDescriptionLbl);
+        usernameTxt = (EditText) mainView.findViewById(R.id.loginUserTxt);
+        passwordTxt = (EditText) mainView.findViewById(R.id.loginPasswordTxt);
+        loginBtn = (Button) mainView.findViewById(R.id.loginLoginBtn);
+        signupBtn = (Button) mainView.findViewById(R.id.loginToSignupBtn);
 
         // Triggering UI elements' animations
         titleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         subtitleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         usernameTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
-        usernameIcon.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         passwordTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
-        passwordIcon.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         loginBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         signupBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
