@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
             android:layout_marginBottom="136dp"
             android:fontFamily="@font/inter_bold"
             android:text="@string/iniciar_sesi_n"
@@ -24,7 +25,8 @@
             android:textColorHint="@color/accent_200"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/loginDescriptionLbl"
@@ -55,7 +57,7 @@
             android:layout_marginEnd="32dp"
             android:background="@drawable/gray_entry"
             android:drawableLeft="@drawable/user24"
-            android:drawablePadding="10dp"
+            android:drawablePadding="15dp"
             android:ems="10"
             android:fontFamily="@font/inter_light"
             android:hint="@string/usuario"
@@ -78,7 +80,7 @@
             android:layout_marginEnd="32dp"
             android:background="@drawable/gray_entry"
             android:drawableLeft="@drawable/key24"
-            android:drawablePadding="10dp"
+            android:drawablePadding="15dp"
             android:ems="10"
             android:fontFamily="@font/inter_light"
             android:hint="@string/contrase_a"

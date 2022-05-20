@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.services.BackendProxy;
@@ -25,13 +24,9 @@ public class SignupFragment extends Fragment {
 
     private TextView titleLbl;
     private TextView subtitleLbl;
-    private ImageView imageImg;
     private EditText userTxt;
     private EditText usernameTxt;
     private EditText passwordTxt;
-    private ConstraintLayout userIcon;
-    private ConstraintLayout usernameIcon;
-    private ConstraintLayout passwordIcon;
     private Button signupBtn;
     private Button loginBtn;
     private BackendProxy backend;
@@ -46,27 +41,19 @@ public class SignupFragment extends Fragment {
 
         // Setting up the UI elements
         titleLbl = (TextView) mainView.findViewById(R.id.signupTitleLbl);
-        subtitleLbl = (TextView) mainView.findViewById(R.id.signupSubtitleLbl);
-        imageImg = (ImageView) mainView.findViewById(R.id.signupImage);
+        subtitleLbl = (TextView) mainView.findViewById(R.id.signupDescriptionLbl);
         userTxt = (EditText) mainView.findViewById(R.id.signupUserTxt);
-        userIcon = (ConstraintLayout) mainView.findViewById(R.id.signupUserIconBack);
-        usernameTxt = (EditText) mainView.findViewById(R.id.signupUsernameText);
-        usernameIcon = (ConstraintLayout) mainView.findViewById(R.id.signupUsernameIconBack);
+        usernameTxt = (EditText) mainView.findViewById(R.id.signupNameTxt);
         passwordTxt = (EditText) mainView.findViewById(R.id.signupPasswordTxt);
-        passwordIcon = (ConstraintLayout) mainView.findViewById(R.id.signupPasswordIconBack);
-        signupBtn = (Button) mainView.findViewById(R.id.signupBtn);
-        loginBtn = (Button) mainView.findViewById(R.id.toLoginBtn);
+        signupBtn = (Button) mainView.findViewById(R.id.signupSignupBtn);
+        loginBtn = (Button) mainView.findViewById(R.id.signupToLoginBtn);
 
         // Triggering UI elements' animations
         titleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         subtitleLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
-        imageImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
         userTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
-        userIcon.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         usernameTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
-        usernameIcon.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         passwordTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
-        passwordIcon.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         signupBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         loginBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
@@ -135,10 +122,5 @@ public class SignupFragment extends Fragment {
         });
 
         return mainView;
-    }
-
-    public boolean validateText(String name, String username, String password) {
-        return (name.replace(" ", "") != "" && username.replace(" ", "")
-                != "" && password.replace(" ", "") != "");
     }
 }
