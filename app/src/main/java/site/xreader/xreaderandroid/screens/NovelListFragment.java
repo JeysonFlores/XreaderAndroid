@@ -7,10 +7,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.transition.TransitionInflater;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,11 +47,18 @@ public class NovelListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View mainView = inflater.inflate(R.layout.fragment_novel_list, container, false);
+        TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
+        setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
         goBackBtn = (Button) mainView.findViewById(R.id.novelListGoBackBtn);
         searchTxt = (EditText) mainView.findViewById(R.id.novelListSearchTxt);
         searchDescriptionLbl = (TextView) mainView.findViewById(R.id.novelListSearchDescriptionLbl);
         queryRv = (RecyclerView) mainView.findViewById(R.id.novelListElementsRv);
+
+        goBackBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        searchTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        searchDescriptionLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        queryRv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
         if(query.contentEquals("")) {
             searchDescriptionLbl.setText("Todas las novelas");

@@ -52,10 +52,6 @@ public class HomeFragment extends Fragment {
     private InternalDbHelper internalStorage;
     private User loggedUser;
 
-    public HomeFragment(BackendProxy backend) {
-        this.backend = backend;
-    }
-
     public HomeFragment(BackendProxy backend, User loggedUser) {
         this.backend = backend;
         this.loggedUser = loggedUser;
@@ -64,13 +60,16 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // View initializing
         View mainView = inflater.inflate(R.layout.fragment_home,container,false);
         TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
         setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
+        // Internal database initialization
         internalStorage = new InternalDbHelper(getContext());
         loggedUser.updateFavorites(internalStorage);
 
+        // Setting up the UI elements
         logoImg = (ImageView) mainView.findViewById(R.id.homeTitleImg);
         logoLbl = (TextView) mainView.findViewById(R.id.homeTitleLbl);
         logoutBtn = (Button) mainView.findViewById(R.id.homeLogoutBtn);
@@ -82,6 +81,7 @@ public class HomeFragment extends Fragment {
         favCountLbl = (TextView) mainView.findViewById(R.id.homeFavoritesCountLbl);
         favoritesRv = (RecyclerView) mainView.findViewById(R.id.homeFavoritesView);
 
+        // Triggering UI elements' animations
         logoImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         logoLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         logoutBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
@@ -93,6 +93,7 @@ public class HomeFragment extends Fragment {
         favCountLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         favoritesRv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
+        // Events handling
         logoutBtn.setOnClickListener((v) -> {
             logoutBtn.setEnabled(false);
 
@@ -128,7 +129,9 @@ public class HomeFragment extends Fragment {
                     loggedUser.getUsername(), "")).commit();
         });
 
+        // API call to get the 5 latest novels
         backend.getRecentNovels((novels) -> {
+            // On success: fills the Recent Recycler View with the data
             linearMng = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
             recentAdapter = new RecentsAdapter(getContext(), novels);
@@ -141,6 +144,7 @@ public class HomeFragment extends Fragment {
             recentRv.setAdapter(recentAdapter);
             recentRv.setLayoutManager(linearMng);
         }, (error) -> {
+            // On error: Shows error and logs out
             StatusDialog.createError(getContext(), getString(R.string.connection_error),
                     () -> {
                         FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -148,7 +152,9 @@ public class HomeFragment extends Fragment {
                     }).show();
         });
 
+        // API call to get all novels
         backend.getNovels((novels) -> {
+            // On success: Matches novels with user's favorite novels' id
             ArrayList<Novel> favNovelList = loadFavoriteNovels(novels);
             favCountLbl.setText("(" + favNovelList.size() + " elementos)");
 
@@ -163,6 +169,7 @@ public class HomeFragment extends Fragment {
             favoritesRv.setAdapter(favAdapter);
             favoritesRv.setLayoutManager(favMng);
         }, (error) -> {
+            // On error: Shows error and logs out
             StatusDialog.createError(getContext(), getString(R.string.connection_error),
                     () -> {
                         FragmentManager fm = getActivity().getSupportFragmentManager();

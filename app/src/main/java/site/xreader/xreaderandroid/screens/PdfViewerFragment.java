@@ -30,13 +30,16 @@ public class PdfViewerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // View initializing
         View mainView =  inflater.inflate(R.layout.fragment_pdf_viewer, container, false);
         TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
         setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
+        // Setting up the UI elements
         goBackBtn = (Button) mainView.findViewById(R.id.pdfViewerGoBackBtn);
         webView = (WebView) mainView.findViewById(R.id.pdfViewerWeb);
 
+        // Setting up UI elements' data
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + URL);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -45,7 +48,7 @@ public class PdfViewerFragment extends Fragment {
         webView.getSettings().setSupportMultipleWindows(true);
         webView.getSettings().setSupportZoom(true);
 
-        //
+        // Event handling
         goBackBtn.setOnClickListener((v) -> {
             FragmentManager fm = getActivity().getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();

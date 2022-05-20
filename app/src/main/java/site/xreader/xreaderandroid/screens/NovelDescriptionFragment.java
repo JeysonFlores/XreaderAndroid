@@ -77,7 +77,7 @@ public class NovelDescriptionFragment extends Fragment {
         novelImg.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
         descriptionLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
 
-        // I
+        // Internal database initialization
         internalStorage = new InternalDbHelper(getContext());
 
         // Setting up UI elements' data
