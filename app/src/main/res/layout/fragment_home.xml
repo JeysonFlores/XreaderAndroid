@@ -68,6 +68,40 @@
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homeSearchDiv"
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <EditText
+                android:id="@+id/homeSearchTxt"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="17dp"
+                android:background="@drawable/gray_entry"
+                android:drawableLeft="@drawable/search_icon"
+                android:drawablePadding="10dp"
+                android:textSize="14sp"
+                android:ems="10"
+                android:fontFamily="@font/inter_regular"
+                android:hint="Búsqueda de algo interesante...."
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/gray_600"
+                android:textColorHint="@color/gray_400"
+                android:textDirection="firstStrongLtr"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <include layout="@layout/home_recents_div" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,12 +114,13 @@
                 android:layout_width="150dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="128dp"
-                android:paddingLeft="10dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/button_success_rounded"
+                android:drawableLeft="@drawable/list_icon"
+                android:paddingLeft="27dp"
                 android:text="Ver todas"
-                android:textSize="12sp"
                 android:textAllCaps="false"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
