@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import site.xreader.xreaderandroid.PdfViewerFragment;
 import site.xreader.xreaderandroid.R;
 import site.xreader.xreaderandroid.adapters.VolumesListAdapter;
 import site.xreader.xreaderandroid.models.Novel;

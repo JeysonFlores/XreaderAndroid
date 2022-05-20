@@ -1,4 +1,4 @@
-package site.xreader.xreaderandroid;
+package site.xreader.xreaderandroid.screens;
 
 import android.os.Bundle;
 
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+
+import site.xreader.xreaderandroid.R;
 
 public class PdfViewerFragment extends Fragment {
 

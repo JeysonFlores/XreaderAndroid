@@ -19,8 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import site.xreader.xreaderandroid.R;
@@ -31,6 +29,7 @@ import site.xreader.xreaderandroid.models.User;
 import site.xreader.xreaderandroid.services.BackendProxy;
 import site.xreader.xreaderandroid.services.InternalDbHelper;
 import site.xreader.xreaderandroid.widgets.DecisionDialog;
+import site.xreader.xreaderandroid.widgets.NovelCard;
 import site.xreader.xreaderandroid.widgets.StatusDialog;
 
 public class HomeFragment extends Fragment {
@@ -110,14 +109,23 @@ public class HomeFragment extends Fragment {
             if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                     (keyCode == KeyEvent.KEYCODE_ENTER)) {
                 if(!searchTxt.getText().toString().replace(" ", "").isEmpty()) {
-                    Toast.makeText(getContext(), searchTxt.getText(), Toast.LENGTH_SHORT).show();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.beginTransaction().replace(R.id.scenario, new NovelListFragment(backend, this,
+                            loggedUser.getUsername(), searchTxt.getText().toString())).commit();
                 } else {
-                    Toast.makeText(getContext(), "Campo vacío", Toast.LENGTH_SHORT).show();
+                    StatusDialog.createError(getContext(), "Búsqueda vacía. Ingrese más" +
+                            "caracteres");
                 }
 
                 return true;
             }
             return false;
+        });
+
+        showAllBtn.setOnClickListener((v) -> {
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.scenario, new NovelListFragment(backend, this,
+                    loggedUser.getUsername(), "")).commit();
         });
 
         backend.getNovels((novels) -> {

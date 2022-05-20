@@ -179,6 +179,50 @@ public class BackendProxy {
                 });
     }
 
+    public void searchNovels(String query, ListNovelCallback cb, ErrorCallback ecb) {
+        RequestParams params = new RequestParams();
+        params.setParam("query", query);
+        params.setParam("token", getToken());
+
+        String URL = UrlBuilder.build(API_URL + "/novels/search", params);
+
+        HttpAgent.get(URL)
+                .goJson(new JsonCallback() {
+                    @Override
+                    protected void onDone(boolean success, JSONObject jsonResults) {
+                        try {
+                            if (success) {
+                                if (!jsonResults.isNull("novels")) {
+                                    ArrayList<Novel> responseNovels = new ArrayList<>();
+                                    JSONArray responseArray = jsonResults.getJSONArray("novels");
+
+                                    for (int i=0; i < responseArray.length(); i++){
+                                        JSONObject element = responseArray.getJSONObject(i);
+
+                                        int id = element.getInt("id");
+                                        String name = element.getString("name");
+                                        String description = element.getString("description");
+                                        String author = element.getString("author");
+                                        String image_path = element.getString("image_path");
+                                        int publishing_year = element.getInt("publishing_year");
+
+                                        responseNovels.add(new Novel(id, name, description, author, image_path, publishing_year));
+                                    }
+
+                                    cb.call(responseNovels);
+                                } else {
+                                    ecb.call("NotFoundError");
+                                }
+                            } else {
+                                ecb.call("RequestError");
+                            }
+                        } catch (Exception e) {
+                            ecb.call("ResponseError");
+                        }
+                    }
+                });
+    }
+
     public void getAllVolumesFromNovel(int novel_id, ListVolumesCallback cb, ErrorCallback ecb) {
         RequestParams params = new RequestParams();
         params.setParam("token", getToken());
