@@ -128,7 +128,7 @@ public class HomeFragment extends Fragment {
                     loggedUser.getUsername(), "")).commit();
         });
 
-        backend.getNovels((novels) -> {
+        backend.getRecentNovels((novels) -> {
             linearMng = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
             recentAdapter = new RecentsAdapter(getContext(), novels);
@@ -140,7 +140,15 @@ public class HomeFragment extends Fragment {
 
             recentRv.setAdapter(recentAdapter);
             recentRv.setLayoutManager(linearMng);
+        }, (error) -> {
+            StatusDialog.createError(getContext(), getString(R.string.connection_error),
+                    () -> {
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
+                    }).show();
+        });
 
+        backend.getNovels((novels) -> {
             ArrayList<Novel> favNovelList = loadFavoriteNovels(novels);
             favCountLbl.setText("(" + favNovelList.size() + " elementos)");
 
