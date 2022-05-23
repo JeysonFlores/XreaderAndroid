@@ -2,6 +2,7 @@ package site.xreader.xreaderandroid.screens;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -52,6 +53,14 @@ public class PdfViewerFragment extends Fragment {
         goBackBtn.setOnClickListener((v) -> {
             FragmentManager fm = getActivity().getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();
+        });
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();
+            }
         });
 
         return mainView;

@@ -2,6 +2,7 @@ package site.xreader.xreaderandroid.screens;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -178,6 +179,21 @@ public class HomeFragment extends Fragment {
                         FragmentManager fm = getActivity().getSupportFragmentManager();
                         fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
                     }).show();
+        });
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                logoutBtn.setEnabled(false);
+
+                DecisionDialog.create(getContext(), getString(R.string.logout_title), getString(R.string.logout_message),
+                    () -> {
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.beginTransaction().replace(R.id.scenario, new LoginFragment()).commit();
+                    }, () -> {
+                        logoutBtn.setEnabled(true);
+                    }).show();
+            }
         });
 
         return mainView;
