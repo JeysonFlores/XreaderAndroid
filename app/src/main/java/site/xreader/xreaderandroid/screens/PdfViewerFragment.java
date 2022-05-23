@@ -55,6 +55,7 @@ public class PdfViewerFragment extends Fragment {
             fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();
         });
 
+        // Back event overriding
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {

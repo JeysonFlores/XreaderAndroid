@@ -47,26 +47,29 @@ public class NovelListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // View initializing
         View mainView = inflater.inflate(R.layout.fragment_novel_list, container, false);
         TransitionInflater transitionInflater = TransitionInflater.from(requireContext());
         setEnterTransition(transitionInflater.inflateTransition(R.transition.slide_right));
 
+        // Setting up the UI elements
         goBackBtn = (Button) mainView.findViewById(R.id.novelListGoBackBtn);
         searchTxt = (EditText) mainView.findViewById(R.id.novelListSearchTxt);
         searchDescriptionLbl = (TextView) mainView.findViewById(R.id.novelListSearchDescriptionLbl);
         queryRv = (RecyclerView) mainView.findViewById(R.id.novelListElementsRv);
-
-        goBackBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
-        searchTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
-        searchDescriptionLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
-        queryRv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
-
         if(query.contentEquals("")) {
             searchDescriptionLbl.setText("Todas las novelas");
         } else {
             searchDescriptionLbl.setText("Resultados con: " + query);
         }
 
+        // Triggering UI elements' animations
+        goBackBtn.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        searchTxt.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        searchDescriptionLbl.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+        queryRv.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.lefttoright));
+
+        // Events handling
         goBackBtn.setOnClickListener((v) -> {
             FragmentManager fm = getActivity().getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.scenario, previousScreen).commit();
@@ -89,7 +92,9 @@ public class NovelListFragment extends Fragment {
             return false;
         });
 
+        // API search novels request
         backend.searchNovels(query, (novels) -> {
+            // On success: Shows the queried novels into the RecyclerView
             queryMng = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             queryAdapter = new VerticalNovelCardAdapter(getContext(), novels);
             queryAdapter.setElementClickListener((novel) -> {
@@ -101,6 +106,7 @@ public class NovelListFragment extends Fragment {
             queryRv.setAdapter(queryAdapter);
             queryRv.setLayoutManager(queryMng);
         }, (error) ->{
+            //On error: Shows an error message and go back to the previous screen
             StatusDialog.createError(getContext(), "Hubo un error en la búsqueda de novelas",
                     () -> {
                         FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -108,6 +114,7 @@ public class NovelListFragment extends Fragment {
                     }).show();
         });
 
+        // Back event overriding
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
